@@ -32,6 +32,7 @@
   --mono:'IBM Plex Mono','SFMono-Regular',Consolas,monospace;
 
   --maxw:1120px;
+  --headh:60px;
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
@@ -52,6 +53,7 @@
 
 *{box-sizing:border-box}
 [hidden]{display:none!important}
+html{scroll-behavior:smooth}
 body{
   background:var(--bg); color:var(--ink);
   font-family:var(--body); font-size:16px; line-height:1.6;
@@ -70,27 +72,29 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   backdrop-filter:blur(10px);
   border-bottom:1px solid var(--line);
 }
-.topbar .wrap{display:flex;align-items:center;gap:14px;min-height:58px;flex-wrap:wrap}
+.topbar .wrap{display:flex;align-items:center;gap:12px;min-height:58px;flex-wrap:wrap}
 .brand{font-family:var(--display);font-weight:900;letter-spacing:-.02em;font-size:1.02rem;text-transform:uppercase;margin-right:auto}
 .brand span{color:var(--accent)}
 .nav{display:flex;gap:18px;flex-wrap:wrap}
 .nav a{font-family:var(--mono);font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
 .nav a:hover,.nav a.on{color:var(--ink)}
 .nav a.on{color:var(--accent)}
-#themeBtn{
+.ctrl{
   background:transparent;border:1px solid var(--line);color:var(--muted);cursor:pointer;
   font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;
   transition:border-color .2s,color .2s;
 }
-#themeBtn:hover{border-color:var(--accent);color:var(--accent)}
+.ctrl:hover{border-color:var(--accent);color:var(--accent)}
 #progress{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--accent);transition:width .12s linear}
-@media (max-width:700px){
-  .topbar .wrap{min-height:0;padding-block:9px 0;gap:10px}
+@media (max-width:760px){
+  .topbar .wrap{min-height:0;padding-block:9px 0;gap:8px}
   .brand{flex:1 1 auto;font-size:.95rem}
   .nav{order:3;flex:1 0 100%;flex-wrap:nowrap;overflow-x:auto;gap:18px;padding-bottom:9px;scrollbar-width:none}
   .nav::-webkit-scrollbar{display:none}
   .nav a{white-space:nowrap}
 }
+
+section[id],div[id]{scroll-margin-top:calc(var(--headh) + 14px)}
 
 /* ---- hero ---- */
 .hero{padding-block:52px 40px;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
@@ -123,9 +127,8 @@ h1 .thin{display:block;font-weight:400;color:var(--muted);font-size:.36em;letter
 .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:8px}
 .fact{background:var(--surface);padding:16px 18px;min-width:0}
 .fact dt{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
-.fact dd{margin:0;font-weight:600;font-size:.96rem}
-.fact .big{font-family:var(--display);font-weight:900;font-size:2rem;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
-.fact .big small{font-size:.44em;font-weight:400;color:var(--muted);margin-left:6px;letter-spacing:0}
+.fact dd{margin:0;font-family:var(--display);font-weight:900;font-size:2rem;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.fact dd small{font-size:.44em;font-weight:400;color:var(--muted);margin-left:6px;letter-spacing:0;font-family:var(--body)}
 
 /* ---- sections ---- */
 section{padding-block:52px;border-top:1px solid var(--line)}
@@ -192,19 +195,52 @@ figcaption{font-family:var(--mono);font-size:.68rem;color:var(--muted);padding:8
 footer{border-top:1px solid var(--line);padding-block:26px 40px}
 footer p{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
 
+/* ---- retour en haut ---- */
+#toTop{
+  position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:40;
+  background:var(--surface);border:1px solid var(--line);color:var(--ink);
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:9px 12px;cursor:pointer;box-shadow:var(--shadow);
+  opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .25s,transform .25s,border-color .2s,color .2s;
+}
+#toTop.show{opacity:1;transform:none;pointer-events:auto}
+#toTop:hover{border-color:var(--accent);color:var(--accent)}
+
 /* ---- apparition ---- */
 .pre{opacity:0;transform:translateY(16px)}
 [data-reveal]{transition:opacity .6s ease,transform .6s ease}
 
 /* ---- visionneuse ---- */
-#lightbox{position:fixed;inset:0;z-index:60;background:rgba(8,12,15,.92);display:grid;place-items:center;padding:24px}
-#lightbox img{max-width:min(100%,1200px);max-height:85vh;width:auto;box-shadow:0 20px 60px rgba(0,0,0,.6)}
-#lightbox .lb-cap{position:absolute;left:0;right:0;bottom:22px;text-align:center;color:#cfd8de;font-family:var(--mono);font-size:.74rem;padding-inline:20px}
-#lbClose{position:absolute;top:16px;right:18px;background:transparent;border:1px solid rgba(255,255,255,.35);color:#fff;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px;cursor:pointer}
+#lightbox{position:fixed;inset:0;z-index:60;background:rgba(8,12,15,.93);display:grid;place-items:center;padding:24px;touch-action:none}
+#lightbox img{max-width:min(100%,1200px);max-height:82vh;width:auto;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+#lightbox .lb-cap{position:absolute;left:0;right:0;bottom:22px;text-align:center;color:#cfd8de;font-family:var(--mono);font-size:.74rem;padding-inline:20px;line-height:1.5}
+#lightbox .lb-cap b{display:block;color:#8d9aa4;font-weight:400;margin-top:4px;font-size:.92em}
+.lb-btn{
+  position:absolute;background:transparent;border:1px solid rgba(255,255,255,.35);color:#fff;
+  font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:10px 13px;cursor:pointer;transition:background .2s,border-color .2s;
+}
+.lb-btn:hover{background:rgba(255,255,255,.14);border-color:#fff}
+#lbClose{top:16px;right:18px;font-size:.72rem;padding:6px 10px}
+#lbPrev{left:16px;top:50%;transform:translateY(-50%)}
+#lbNext{right:16px;top:50%;transform:translateY(-50%)}
+@media (max-width:620px){#lbPrev{left:8px}#lbNext{right:8px}.lb-btn{padding:8px 10px}}
 
 @media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
   *{animation:none!important;transition:none!important}
   .pre{opacity:1;transform:none}
+}
+
+/* ---- impression ---- */
+@media print{
+  .topbar,#toTop,#lightbox,.board,.copy,#progress{display:none!important}
+  body{background:#fff;color:#000;font-size:11pt}
+  section{page-break-inside:avoid;border-top:1px solid #bbb;padding-block:18px}
+  figure{break-inside:avoid;border:1px solid #ccc}
+  .shots{grid-template-columns:repeat(3,1fr)}
+  a{color:#000;text-decoration:underline}
+  .hero{display:block;padding-block:0 18px}
 }
 </style>
 </head>
@@ -213,13 +249,14 @@ footer p{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
   <div class="wrap">
     <div class="brand">Mourat <span>Nathan</span></div>
     <nav class="nav">
-      <a href="#profil">Profil</a>
-      <a href="#competences">Compétences</a>
-      <a href="#projets">Projets</a>
-      <a href="#parcours">Parcours</a>
-      <a href="#contact">Contact</a>
+      <a href="#profil" data-en="Profile">Profil</a>
+      <a href="#competences" data-en="Skills">Compétences</a>
+      <a href="#projets" data-en="Projects">Projets</a>
+      <a href="#parcours" data-en="Background">Parcours</a>
+      <a href="#contact" data-en="Contact">Contact</a>
     </nav>
-    <button id="themeBtn" type="button" aria-label="Changer de thème">Thème</button>
+    <button id="langBtn" class="ctrl" type="button" aria-label="Switch to English">EN</button>
+    <button id="themeBtn" class="ctrl" type="button" aria-label="Changer de thème">Thème</button>
   </div>
   <div id="progress"></div>
 </header>
@@ -228,48 +265,48 @@ footer p{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
 
 <div class="wrap hero" id="profil">
   <div>
-    <p class="eyebrow">Master 1 Énergie — Université de La Réunion</p>
+    <p class="eyebrow" data-en="Master 1 Energy — University of La Réunion">Master 1 Énergie — Université de La Réunion</p>
     <h1>Portfolio
-      <span class="thin">Photovoltaïque, réseaux DC et automatisme</span>
+      <span class="thin" data-en="Photovoltaics, DC networks and automation">Photovoltaïque, réseaux DC et automatisme</span>
     </h1>
-    <p class="lead">
+    <p class="lead" data-en="After a BUT GEII degree majoring in Automation and Industrial Computing at IUT de Nantes, I am now in the first year of an Energy master's in Saint-Denis, La Réunion. I come from the control cabinet: schematics, wiring, PLCs, drives and HMIs. I am now moving towards solar, direct-current networks and storage.">
       Après un BUT GEII spécialité Automatisme et informatique industrielle à l'IUT de Nantes,
       je poursuis en Master 1 Énergie à Saint-Denis de La Réunion. Je viens de l'armoire électrique :
       schéma, câblage, automate, variateur, IHM. Je m'oriente aujourd'hui vers le solaire,
       les réseaux en courant continu et le stockage.
     </p>
-    <p class="status"><span class="dot"></span> Recherche un stage en photovoltaïque — avril à mi-juin 2027</p>
+    <p class="status"><span class="dot"></span><span data-en="Looking for a photovoltaics internship — April to mid-June 2027">Recherche un stage en photovoltaïque — avril à mi-juin 2027</span></p>
   </div>
 
   <div class="board">
     <canvas id="pcb" aria-label="Carte électronique en trois dimensions, en rotation"></canvas>
-    <div id="pcbFallback" class="board-fallback" hidden>Carte 3D indisponible sur ce navigateur</div>
-    <span class="board-cap">Glisser pour faire tourner</span>
+    <div id="pcbFallback" class="board-fallback" data-en="3D board not available in this browser" hidden>Carte 3D indisponible sur ce navigateur</div>
+    <span class="board-cap" data-en="Drag to rotate">Glisser pour faire tourner</span>
   </div>
 </div>
 
 <div class="wrap">
 
   <dl class="facts" data-reveal>
-    <div class="fact"><dt>Semaines en entreprise</dt><dd class="big" data-count="24">24</dd></div>
-    <div class="fact"><dt>Durée du stage visé</dt><dd class="big" data-count="10">10<small>semaines</small></dd></div>
-    <div class="fact"><dt>Période</dt><dd class="big">avril<small>mi-juin 2027</small></dd></div>
-    <div class="fact"><dt>Mobilité</dt><dd class="big">3<small>zones</small></dd></div>
+    <div class="fact"><dt data-en="Weeks in industry">Semaines en entreprise</dt><dd><span data-count="24">24</span></dd></div>
+    <div class="fact"><dt data-en="Target internship length">Durée du stage visé</dt><dd><span data-count="10">10</span><small data-en="weeks">semaines</small></dd></div>
+    <div class="fact"><dt data-en="Period">Période</dt><dd><span data-en="April">avril</span><small data-en="to mid-June 2027">mi-juin 2027</small></dd></div>
+    <div class="fact"><dt data-en="Mobility">Mobilité</dt><dd><span>3</span><small data-en="regions">zones</small></dd></div>
   </dl>
 
 <section id="recherche">
   <div class="sec-head">
-    <h2>Ce que je cherche</h2>
-    <span class="sec-ref">Stage M1 · 2027</span>
+    <h2 data-en="What I am looking for">Ce que je cherche</h2>
+    <span class="sec-ref" data-en="Master's internship · 2027">Stage M1 · 2027</span>
   </div>
   <div class="two-col" data-reveal>
     <div>
-      <p>
+      <p data-en="A ten-week internship, from April to mid-June 2027, on a photovoltaic subject: sizing and simulation of installations, production monitoring and performance analysis, direct-current architectures, PV–storage coupling, or power quality and protection.">
         Un stage d'environ dix semaines, d'avril à mi-juin 2027, sur un sujet photovoltaïque :
         dimensionnement et simulation d'installations, suivi de production et analyse de performance,
         architectures en courant continu, couplage PV–stockage, ou qualité et protection des réseaux.
       </p>
-      <p style="margin-top:14px">
+      <p style="margin-top:14px" data-en="Automation remains my foundation: I can read and produce a wiring diagram, wire a cabinet, program a PLC and instrument a test bench. That is what I bring to a solar project, from prototype to commissioning.">
         L'automatisme reste mon point d'appui : je sais lire et produire un schéma, câbler une armoire,
         programmer un automate et instrumenter un banc d'essai. C'est ce que j'apporte sur un projet solaire,
         du prototype à la mise en service.
@@ -277,12 +314,12 @@ footer p{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
     </div>
     <div class="skills">
       <div class="skill-group">
-        <h3>Terrains visés</h3>
+        <h3 data-en="Target organisations">Terrains visés</h3>
         <ul>
-          <li>Bureaux d'études et installateurs PV</li>
-          <li>Producteurs et exploitants d'actifs solaires</li>
-          <li>Laboratoires et centres de recherche énergie</li>
-          <li>Fabricants d'onduleurs et de stockage</li>
+          <li data-en="Engineering consultancies and PV installers">Bureaux d'études et installateurs PV</li>
+          <li data-en="Solar asset producers and operators">Producteurs et exploitants d'actifs solaires</li>
+          <li data-en="Energy research laboratories and centres">Laboratoires et centres de recherche énergie</li>
+          <li data-en="Inverter and storage manufacturers">Fabricants d'onduleurs et de stockage</li>
         </ul>
       </div>
     </div>
@@ -291,43 +328,43 @@ footer p{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
 
 <section id="competences">
   <div class="sec-head">
-    <h2>Compétences</h2>
-    <span class="sec-ref">Techniques et outils</span>
+    <h2 data-en="Skills">Compétences</h2>
+    <span class="sec-ref" data-en="Techniques and tools">Techniques et outils</span>
   </div>
   <div class="skills" data-reveal>
     <div class="skill-group">
-      <h3>Automatisme</h3>
+      <h3 data-en="Automation">Automatisme</h3>
       <ul>
-        <li>GRAFCET, Ladder, FBD, ST</li>
-        <li>Automates programmables</li>
-        <li>Variateurs de vitesse</li>
-        <li>Programmation et paramétrage d'IHM</li>
-        <li>Omron Sysmac Studio</li>
+        <li data-en="GRAFCET, Ladder, FBD, ST">GRAFCET, Ladder, FBD, ST</li>
+        <li data-en="Programmable logic controllers">Automates programmables</li>
+        <li data-en="Variable speed drives">Variateurs de vitesse</li>
+        <li data-en="HMI programming and configuration">Programmation et paramétrage d'IHM</li>
+        <li data-en="Omron Sysmac Studio">Omron Sysmac Studio</li>
       </ul>
     </div>
     <div class="skill-group">
-      <h3>Électrotechnique</h3>
+      <h3 data-en="Electrical engineering">Électrotechnique</h3>
       <ul>
-        <li>Schémas de puissance et de commande</li>
-        <li>Câblage d'armoire et repérage</li>
-        <li>Tests de continuité et diagnostic</li>
-        <li>Capteurs et chaînes de mesure</li>
+        <li data-en="Power and control wiring diagrams">Schémas de puissance et de commande</li>
+        <li data-en="Cabinet wiring and conductor marking">Câblage d'armoire et repérage</li>
+        <li data-en="Continuity testing and fault finding">Tests de continuité et diagnostic</li>
+        <li data-en="Sensors and measurement chains">Capteurs et chaînes de mesure</li>
       </ul>
     </div>
     <div class="skill-group">
-      <h3>Conception et calcul</h3>
+      <h3 data-en="Design and analysis">Conception et calcul</h3>
       <ul>
-        <li>SEE Electrical, XRelais</li>
-        <li>Python</li>
-        <li>Fiches de tests et procédures de validation</li>
-        <li>Bilans énergétiques</li>
+        <li data-en="SEE Electrical, XRelais">SEE Electrical, XRelais</li>
+        <li data-en="Python">Python</li>
+        <li data-en="Test sheets and validation procedures">Fiches de tests et procédures de validation</li>
+        <li data-en="Energy balances">Bilans énergétiques</li>
       </ul>
     </div>
     <div class="skill-group">
-      <h3>Langues</h3>
+      <h3 data-en="Languages">Langues</h3>
       <ul>
-        <li>Français — langue maternelle</li>
-        <li>Anglais — technique, lu, écrit, parlé</li>
+        <li data-en="French — native">Français — langue maternelle</li>
+        <li data-en="English — technical, read, written, spoken">Anglais — technique, lu, écrit, parlé</li>
       </ul>
     </div>
   </div>
@@ -335,17 +372,17 @@ footer p{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
 
 <section id="projets">
   <div class="sec-head">
-    <h2>Projets</h2>
+    <h2 data-en="Projects">Projets</h2>
     <span class="sec-ref">BUT GEII · 2022—2026</span>
   </div>
 
   <article class="project" data-reveal>
     <div class="project-head">
       <span class="project-num">P1</span>
-      <h3>Câblages électriques</h3>
-      <span class="tag">Concevoir</span>
+      <h3 data-en="Electrical wiring">Câblages électriques</h3>
+      <span class="tag" data-en="Design">Concevoir</span>
     </div>
-    <p>
+    <p data-en="On every project, at school as in industry, everything starts with the diagram. It is the basis of the work and what makes the wiring fast and verifiable afterwards.">
       Sur chaque projet, en cours comme en entreprise, tout part du schéma. C'est la base du travail
       et ce qui rend le câblage rapide et vérifiable ensuite.
     </p>
@@ -353,50 +390,50 @@ footer p{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
       <div class="step">
         <span class="step-n">01</span>
         <div>
-          <h4>Schéma électrique</h4>
-          <p>Tracé des circuits de puissance et de commande, repérage des bornes et des conducteurs, choix des protections.</p>
+          <h4 data-en="Wiring diagram">Schéma électrique</h4>
+          <p data-en="Drawing the power and control circuits, marking terminals and conductors, selecting the protective devices.">Tracé des circuits de puissance et de commande, repérage des bornes et des conducteurs, choix des protections.</p>
         </div>
       </div>
       <div class="step">
         <span class="step-n">02</span>
         <div>
-          <h4>Câblage</h4>
-          <p>Réalisation dans l'armoire en suivant le schéma. Quand le schéma présente un défaut, il faut retomber sur un câblage normé à partir de l'expérience.</p>
+          <h4 data-en="Wiring">Câblage</h4>
+          <p data-en="Building the cabinet by following the diagram. When the diagram has a flaw, experience is what brings the wiring back to standard.">Réalisation dans l'armoire en suivant le schéma. Quand le schéma présente un défaut, il faut retomber sur un câblage normé à partir de l'expérience.</p>
         </div>
       </div>
     </div>
     <div class="shots">
-      <figure><img src="schema_laptop.jpg" alt="Schéma électrique de commande tracé sur ordinateur" loading="lazy" width="564" height="278"><figcaption>Schéma de commande — logiciel de CAO électrique</figcaption></figure>
-      <figure><img src="pupitre.jpg" alt="Intérieur d'un pupitre de commande câblé, blocs de contacts et conducteurs repérés" loading="lazy" width="1050" height="1400"><figcaption>Câblage d'un pupitre de commande — blocs de contacts NO/NC</figcaption></figure>
-      <figure class="wide"><img src="schema_grand.jpg" alt="Schéma électrique complet d'une installation automatisée" loading="lazy" width="1064" height="540"><figcaption>Schéma complet d'une installation automatisée — puissance et commande</figcaption></figure>
+      <figure><img src="schema_laptop.jpg" alt="Schéma électrique de commande tracé sur ordinateur" loading="lazy" decoding="async" width="564" height="278"><figcaption data-en="Control diagram — electrical CAD software">Schéma de commande — logiciel de CAO électrique</figcaption></figure>
+      <figure><img src="pupitre.jpg" alt="Intérieur d'un pupitre de commande câblé, blocs de contacts et conducteurs repérés" loading="lazy" decoding="async" width="1050" height="1400"><figcaption data-en="Wiring a control pendant — NO/NC contact blocks">Câblage d'un pupitre de commande — blocs de contacts NO/NC</figcaption></figure>
+      <figure class="wide"><img src="schema_grand.jpg" alt="Schéma électrique complet d'une installation automatisée" loading="lazy" decoding="async" width="1064" height="540"><figcaption data-en="Full diagram of an automated installation — power and control">Schéma complet d'une installation automatisée — puissance et commande</figcaption></figure>
     </div>
   </article>
 
   <article class="project" data-reveal>
     <div class="project-head">
       <span class="project-num">P2</span>
-      <h3>Fiche de tests et tests de continuité</h3>
-      <span class="tag">Vérifier</span>
+      <h3 data-en="Test sheets and continuity testing">Fiche de tests et tests de continuité</h3>
+      <span class="tag" data-en="Verify">Vérifier</span>
     </div>
-    <p>
+    <p data-en="The test sheet confronts the program with every situation planned for: inputs triggered, expected result, observed result, conclusion. Continuity testing, in turn, uncovered physical faults that the program alone could not reveal on the SAE4 and SAE5 projects.">
       La fiche de tests sert à confronter le programme à toutes les situations prévues : entrées sollicitées,
       résultat attendu, résultat obtenu, conclusion. Les tests de continuité, eux, ont permis de corriger
       des défauts physiques restés invisibles au programme sur les projets SAE4 et SAE5.
     </p>
     <div class="shots">
-      <figure><img src="fiche_tests.jpg" alt="Fiche de tests du programme listant scénarios et résultats attendus" loading="lazy" width="404" height="460"><figcaption>Fiche de tests — scénarios, résultat attendu, résultat obtenu</figcaption></figure>
-      <figure><img src="armoire2.jpg" alt="Banc d'automatisme en atelier avec armoire de commande" loading="lazy" width="1024" height="768"><figcaption>Essais au banc — armoire d'automatisme en atelier</figcaption></figure>
-      <figure><img src="ihm.jpg" alt="Afficheur d'un relais programmable indiquant l'étage et le mode auto" loading="lazy" width="1024" height="768"><figcaption>Retour d'état sur relais programmable — étage et mode de marche</figcaption></figure>
+      <figure><img src="fiche_tests.jpg" alt="Fiche de tests du programme listant scénarios et résultats attendus" loading="lazy" decoding="async" width="404" height="460"><figcaption data-en="Test sheet — scenarios, expected result, observed result">Fiche de tests — scénarios, résultat attendu, résultat obtenu</figcaption></figure>
+      <figure><img src="armoire2.jpg" alt="Banc d'automatisme en atelier avec armoire de commande" loading="lazy" decoding="async" width="1024" height="768"><figcaption data-en="Bench testing — automation cabinet in the workshop">Essais au banc — armoire d'automatisme en atelier</figcaption></figure>
+      <figure><img src="ihm.jpg" alt="Afficheur d'un relais programmable indiquant l'étage et le mode auto" loading="lazy" decoding="async" width="1024" height="768"><figcaption data-en="Status feedback on a programmable relay — floor and operating mode">Retour d'état sur relais programmable — étage et mode de marche</figcaption></figure>
     </div>
   </article>
 
   <article class="project" data-reveal>
     <div class="project-head">
       <span class="project-num">P3</span>
-      <h3>Stage chez Agis</h3>
-      <span class="tag">Maintenir et intégrer</span>
+      <h3 data-en="Internship at Agis">Stage chez Agis</h3>
+      <span class="tag" data-en="Maintain and integrate">Maintenir et intégrer</span>
     </div>
-    <p>
+    <p data-en="Twenty-four weeks in industry over the last two years of the degree, in food processing. Industrial computing maintenance in the second year, then full integration of a machine in the third.">
       Vingt-quatre semaines en entreprise sur les deux dernières années du BUT, en agroalimentaire.
       Maintenance d'informatique industrielle en deuxième année, puis intégration complète d'un
       équipement en troisième année.
@@ -405,74 +442,74 @@ footer p{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
       <div class="step">
         <span class="step-n">01</span>
         <div>
-          <h4>Maintenir</h4>
-          <p>Remise en état d'un poste industriel et recherche de solutions pour le fiabiliser dans la durée.</p>
+          <h4 data-en="Maintain">Maintenir</h4>
+          <p data-en="Repairing an industrial workstation and finding ways to keep it reliable over time.">Remise en état d'un poste industriel et recherche de solutions pour le fiabiliser dans la durée.</p>
         </div>
       </div>
       <div class="step">
         <span class="step-n">02</span>
         <div>
-          <h4>Intégrer</h4>
-          <p>Projet BERIEF : développement et intégration d'un ensemble automate, variateur et IHM sur une machine de production.</p>
+          <h4 data-en="Integrate">Intégrer</h4>
+          <p data-en="BERIEF project: developing and integrating a PLC, drive and HMI assembly on a production machine.">Projet BERIEF : développement et intégration d'un ensemble automate, variateur et IHM sur une machine de production.</p>
         </div>
       </div>
     </div>
     <div class="shots">
-      <figure><img src="agis_laptop.jpg" alt="Vue aérienne du site industriel Agis" loading="lazy" width="550" height="330"><figcaption>Site de production — Agis</figcaption></figure>
-      <figure><img src="sysmac.jpg" alt="Programmation dans le logiciel Omron Sysmac Studio" loading="lazy" width="550" height="330"><figcaption>Développement du programme sous Sysmac Studio</figcaption></figure>
-      <figure><img src="malaxeur.jpg" alt="Machine de malaxage agroalimentaire" loading="lazy" width="344" height="234"><figcaption>Type d'équipement traité en production</figcaption></figure>
+      <figure><img src="agis_laptop.jpg" alt="Vue aérienne du site industriel Agis" loading="lazy" decoding="async" width="550" height="330"><figcaption data-en="Production site — Agis">Site de production — Agis</figcaption></figure>
+      <figure><img src="sysmac.jpg" alt="Programmation dans le logiciel Omron Sysmac Studio" loading="lazy" decoding="async" width="550" height="330"><figcaption data-en="Writing the program in Sysmac Studio">Développement du programme sous Sysmac Studio</figcaption></figure>
+      <figure><img src="malaxeur.jpg" alt="Machine de malaxage agroalimentaire" loading="lazy" decoding="async" width="344" height="234"><figcaption data-en="Type of equipment handled in production">Type d'équipement traité en production</figcaption></figure>
     </div>
   </article>
 
   <article class="project" data-reveal>
     <div class="project-head">
       <span class="project-num">P4</span>
-      <h3>Travaux pratiques et prototypes</h3>
-      <span class="tag">Réaliser</span>
+      <h3 data-en="Lab work and prototypes">Travaux pratiques et prototypes</h3>
+      <span class="tag" data-en="Build">Réaliser</span>
     </div>
-    <p>
+    <p data-en="Coursework projects: an instrumented mobile robot, automation benches with position sensors, control pendants and cabinets assembled then commissioned.">
       Projets de formation : robot mobile instrumenté, bancs d'automatisme avec capteurs de position,
       pupitres et armoires montés puis mis en service.
     </p>
     <div class="shots">
-      <figure><img src="robot.jpg" alt="Robot mobile à deux roues avec carte électronique et supercondensateurs" loading="lazy" width="1050" height="1400"><figcaption>Robot mobile instrumenté — carte de commande et stockage embarqué</figcaption></figure>
-      <figure><img src="elevateur.jpg" alt="Maquette d'axe linéaire avec vérin électrique et capteurs de position inductifs" loading="lazy" width="1050" height="1400"><figcaption>Maquette d'axe linéaire — vérin électrique et capteurs de position</figcaption></figure>
+      <figure><img src="robot.jpg" alt="Robot mobile à deux roues avec carte électronique et supercondensateurs" loading="lazy" decoding="async" width="1050" height="1400"><figcaption data-en="Instrumented mobile robot — control board and onboard storage">Robot mobile instrumenté — carte de commande et stockage embarqué</figcaption></figure>
+      <figure><img src="elevateur.jpg" alt="Maquette d'axe linéaire avec vérin électrique et capteurs de position inductifs" loading="lazy" decoding="async" width="1050" height="1400"><figcaption data-en="Linear axis rig — electric actuator and position sensors">Maquette d'axe linéaire — vérin électrique et capteurs de position</figcaption></figure>
     </div>
   </article>
 </section>
 
 <section id="parcours">
   <div class="sec-head">
-    <h2>Parcours</h2>
-    <span class="sec-ref">Formation et expérience</span>
+    <h2 data-en="Background">Parcours</h2>
+    <span class="sec-ref" data-en="Education and experience">Formation et expérience</span>
   </div>
   <div class="timeline" data-reveal>
     <div class="entry">
       <div class="when">2026 — 2027</div>
       <div>
-        <h3>Master 1 Énergie — Université de La Réunion</h3>
-        <p>UFR Sciences et Technologies, campus du Moufia, Saint-Denis.</p>
+        <h3 data-en="Master 1 Energy — University of La Réunion">Master 1 Énergie — Université de La Réunion</h3>
+        <p data-en="Faculty of Science and Technology, Moufia campus, Saint-Denis.">UFR Sciences et Technologies, campus du Moufia, Saint-Denis.</p>
       </div>
     </div>
     <div class="entry">
       <div class="when">2022 — 2026</div>
       <div>
-        <h3>BUT GEII — IUT de Nantes</h3>
-        <p>Génie électrique et informatique industrielle, parcours Automatisme et informatique industrielle.</p>
+        <h3 data-en="BUT GEII — IUT de Nantes">BUT GEII — IUT de Nantes</h3>
+        <p data-en="Electrical engineering and industrial computing, majoring in Automation and Industrial Computing.">Génie électrique et informatique industrielle, parcours Automatisme et informatique industrielle.</p>
       </div>
     </div>
     <div class="entry">
       <div class="when">2024 — 2026</div>
       <div>
-        <h3>Stages chez Agis — 24 semaines</h3>
-        <p>Maintenance d'informatique industrielle, puis projet BERIEF : automate, variateur et IHM intégrés sur machine.</p>
+        <h3 data-en="Internships at Agis — 24 weeks">Stages chez Agis — 24 semaines</h3>
+        <p data-en="Industrial computing maintenance, then the BERIEF project: PLC, drive and HMI integrated on a machine.">Maintenance d'informatique industrielle, puis projet BERIEF : automate, variateur et IHM intégrés sur machine.</p>
       </div>
     </div>
     <div class="entry">
       <div class="when">2022</div>
       <div>
-        <h3>Baccalauréat</h3>
-        <p>Entrée en BUT GEII à la suite du baccalauréat.</p>
+        <h3 data-en="French Baccalaureate">Baccalauréat</h3>
+        <p data-en="Entered the BUT GEII programme after the baccalaureate.">Entrée en BUT GEII à la suite du baccalauréat.</p>
       </div>
     </div>
   </div>
@@ -480,36 +517,36 @@ footer p{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
 
 <section id="contact">
   <div class="sec-head">
-    <h2>Contact</h2>
-    <span class="sec-ref">Disponible pour un stage 2027</span>
+    <h2 data-en="Contact">Contact</h2>
+    <span class="sec-ref" data-en="Available for a 2027 internship">Disponible pour un stage 2027</span>
   </div>
   <div class="contact-grid" data-reveal>
     <div class="card">
-      <span class="label">E-mail</span>
+      <span class="label" data-en="E-mail">E-mail</span>
       <span class="value" id="v-mail">nathanmourat6@gmail.com</span>
-      <button class="copy" type="button" data-copy="v-mail">Copier</button>
+      <button class="copy" type="button" data-copy="v-mail" data-en="Copy">Copier</button>
     </div>
     <div class="card">
-      <span class="label">Téléphone</span>
+      <span class="label" data-en="Phone">Téléphone</span>
       <div class="tel-row">
         <span class="value" id="v-tel1">06 93 52 26 66</span>
-        <button class="copy" type="button" data-copy="v-tel1">Copier</button>
+        <button class="copy" type="button" data-copy="v-tel1" data-en="Copy">Copier</button>
       </div>
       <div class="tel-row">
         <span class="value" id="v-tel2">07 68 25 78 16</span>
-        <button class="copy" type="button" data-copy="v-tel2">Copier</button>
+        <button class="copy" type="button" data-copy="v-tel2" data-en="Copy">Copier</button>
       </div>
-      <span class="note">Les deux numéros sont actifs</span>
+      <span class="note" data-en="Both numbers are active">Les deux numéros sont actifs</span>
     </div>
     <div class="card">
       <span class="label">LinkedIn</span>
       <span class="value"><a href="https://www.linkedin.com/in/nathan-mourat-ba54a3183" target="_blank" rel="noopener">nathan-mourat</a></span>
-      <span class="note">Profil professionnel et actualités</span>
+      <span class="note" data-en="Professional profile and updates">Profil professionnel et actualités</span>
     </div>
     <div class="card">
-      <span class="label">Localisation</span>
+      <span class="label" data-en="Location">Localisation</span>
       <span class="value">Saint-Denis, La Réunion</span>
-      <span class="note">Mobile en Europe et au Royaume-Uni</span>
+      <span class="note" data-en="Mobile across Europe and the United Kingdom">Mobile en Europe et au Royaume-Uni</span>
     </div>
   </div>
 </section>
@@ -519,14 +556,18 @@ footer p{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
 
 <footer>
   <div class="wrap">
-    <p>Mourat Nathan — Master 1 Énergie, Université de La Réunion. Portfolio mis à jour en octobre 2026.</p>
+    <p data-en="Mourat Nathan — Master 1 Energy, University of La Réunion. Portfolio updated October 2026.">Mourat Nathan — Master 1 Énergie, Université de La Réunion. Portfolio mis à jour en octobre 2026.</p>
   </div>
 </footer>
 
+<button id="toTop" type="button" data-en="Top">Haut</button>
+
 <div id="lightbox" hidden>
-  <button id="lbClose" type="button">Fermer</button>
+  <button id="lbClose" class="lb-btn" type="button" data-en="Close">Fermer</button>
+  <button id="lbPrev" class="lb-btn" type="button" aria-label="Image précédente">←</button>
+  <button id="lbNext" class="lb-btn" type="button" aria-label="Image suivante">→</button>
   <img id="lbImg" src="" alt="">
-  <div class="lb-cap" id="lbCap"></div>
+  <div class="lb-cap"><span id="lbCap"></span><b id="lbCount"></b></div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -534,11 +575,32 @@ footer p{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
 (function(){
   'use strict';
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function stored(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function store(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+
+  /* ---------- langue ---------- */
+  var langBtn = document.getElementById('langBtn');
+  var nodes = [].slice.call(document.querySelectorAll('[data-en]'));
+  nodes.forEach(function(el){ el.setAttribute('data-fr', el.textContent.trim().replace(/\s+/g,' ')); });
+  function applyLang(l){
+    nodes.forEach(function(el){
+      var v = el.getAttribute(l === 'en' ? 'data-en' : 'data-fr');
+      if (v != null) el.textContent = v;
+    });
+    document.documentElement.lang = l;
+    langBtn.textContent = l === 'en' ? 'FR' : 'EN';
+    langBtn.setAttribute('aria-label', l === 'en' ? 'Afficher en français' : 'Switch to English');
+  }
+  var lang = stored('lang') === 'en' ? 'en' : 'fr';
+  applyLang(lang);
+  langBtn.addEventListener('click', function(){
+    lang = lang === 'en' ? 'fr' : 'en';
+    store('lang', lang);
+    applyLang(lang);
+  });
 
   /* ---------- thème ---------- */
   var themeBtn = document.getElementById('themeBtn');
-  function stored(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
-  function store(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
   var saved = stored('theme');
   if (saved === 'dark' || saved === 'light') document.documentElement.setAttribute('data-theme', saved);
   function isDark(){
@@ -546,17 +608,21 @@ footer p{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
     if (a) return a === 'dark';
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
-  function syncBtn(){ themeBtn.textContent = isDark() ? 'Clair' : 'Sombre'; }
-  syncBtn();
+  function syncTheme(){
+    themeBtn.textContent = lang === 'en' ? (isDark() ? 'Light' : 'Dark') : (isDark() ? 'Clair' : 'Sombre');
+  }
+  syncTheme();
+  langBtn.addEventListener('click', syncTheme);
   themeBtn.addEventListener('click', function(){
     var next = isDark() ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
     store('theme', next);
-    syncBtn();
+    syncTheme();
   });
 
-  /* ---------- barre de progression + nav active ---------- */
+  /* ---------- progression, nav active, retour en haut ---------- */
   var bar = document.getElementById('progress');
+  var toTop = document.getElementById('toTop');
   var links = [].slice.call(document.querySelectorAll('.nav a'));
   var targets = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
   var ticking = false;
@@ -566,6 +632,7 @@ footer p{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
     requestAnimationFrame(function(){
       var h = document.documentElement.scrollHeight - window.innerHeight;
       bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+      toTop.classList.toggle('show', window.scrollY > 600);
       var best = -1, bestTop = -Infinity;
       for (var i = 0; i < targets.length; i++){
         if (!targets[i]) continue;
@@ -578,6 +645,9 @@ footer p{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
   }
   window.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
+  toTop.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior: reduced ? 'auto' : 'smooth'});
+  });
 
   /* ---------- apparition au défilement ---------- */
   if (!reduced && 'IntersectionObserver' in window){
@@ -601,16 +671,11 @@ footer p{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
       entries.forEach(function(e){
         if (!e.isIntersecting) return;
         cio.unobserve(e.target);
-        var el = e.target;
-        var end = parseInt(el.getAttribute('data-count'), 10);
-        var suffix = el.querySelector('small');
-        var tail = suffix ? suffix.outerHTML : '';
-        var t0 = null, dur = 900;
+        var el = e.target, end = parseInt(el.getAttribute('data-count'), 10), t0 = null;
         function step(ts){
           if (!t0) t0 = ts;
-          var p = Math.min((ts - t0) / dur, 1);
-          var v = Math.round(end * (1 - Math.pow(1 - p, 3)));
-          el.innerHTML = v + tail;
+          var p = Math.min((ts - t0) / 900, 1);
+          el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3)));
           if (p < 1) requestAnimationFrame(step);
         }
         requestAnimationFrame(step);
@@ -627,7 +692,7 @@ footer p{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
       var txt = el.textContent.trim();
       function done(){
         var old = btn.textContent;
-        btn.textContent = 'Copié';
+        btn.textContent = lang === 'en' ? 'Copied' : 'Copié';
         btn.classList.add('ok');
         setTimeout(function(){ btn.textContent = old; btn.classList.remove('ok'); }, 1600);
       }
@@ -645,17 +710,25 @@ footer p{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
     });
   });
 
-  /* ---------- visionneuse d'images ---------- */
+  /* ---------- visionneuse ---------- */
+  var figs = [].slice.call(document.querySelectorAll('figure img'));
   var lb = document.getElementById('lightbox'),
       lbImg = document.getElementById('lbImg'),
       lbCap = document.getElementById('lbCap'),
-      lastFocus = null;
-  function openLb(img){
-    lastFocus = document.activeElement;
+      lbCount = document.getElementById('lbCount'),
+      idx = 0, lastFocus = null;
+  function show(i){
+    idx = (i + figs.length) % figs.length;
+    var img = figs[idx];
     lbImg.src = img.getAttribute('src');
     lbImg.alt = img.getAttribute('alt') || '';
     var fc = img.parentElement.querySelector('figcaption');
     lbCap.textContent = fc ? fc.textContent : '';
+    lbCount.textContent = (idx + 1) + ' / ' + figs.length;
+  }
+  function openLb(i){
+    lastFocus = document.activeElement;
+    show(i);
     lb.hidden = false;
     document.getElementById('lbClose').focus();
   }
@@ -664,12 +737,25 @@ footer p{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
     lbImg.src = '';
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
-  document.querySelectorAll('figure img').forEach(function(img){
-    img.addEventListener('click', function(){ openLb(img); });
+  figs.forEach(function(img, i){
+    img.addEventListener('click', function(){ openLb(i); });
   });
-  lb.addEventListener('click', function(e){ if (e.target !== lbImg) closeLb(); });
   document.getElementById('lbClose').addEventListener('click', closeLb);
-  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !lb.hidden) closeLb(); });
+  document.getElementById('lbPrev').addEventListener('click', function(e){ e.stopPropagation(); show(idx - 1); });
+  document.getElementById('lbNext').addEventListener('click', function(e){ e.stopPropagation(); show(idx + 1); });
+  lb.addEventListener('click', function(e){ if (e.target === lb || e.target === lbImg) closeLb(); });
+  document.addEventListener('keydown', function(e){
+    if (lb.hidden) return;
+    if (e.key === 'Escape') closeLb();
+    else if (e.key === 'ArrowLeft') show(idx - 1);
+    else if (e.key === 'ArrowRight') show(idx + 1);
+  });
+  var sx = 0;
+  lb.addEventListener('touchstart', function(e){ sx = e.touches[0].clientX; }, {passive:true});
+  lb.addEventListener('touchend', function(e){
+    var dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 50) show(idx + (dx < 0 ? 1 : -1));
+  });
 
   /* ---------- carte électronique 3D ---------- */
   var canvas = document.getElementById('pcb');
@@ -692,7 +778,6 @@ footer p{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
   var board = new THREE.Group();
   scene.add(board);
 
-  /* texture du circuit imprimé, dessinée au canvas 2D */
   function pcbTexture(){
     var S = 1024, c = document.createElement('canvas');
     c.width = c.height = S;
@@ -701,7 +786,6 @@ footer p{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
     g.fillStyle = 'rgba(255,255,255,.03)';
     for (var i = 0; i < 2600; i++){ g.fillRect(Math.random()*S, Math.random()*S, 1, 1); }
 
-    // pistes cuivre
     g.strokeStyle = '#b9833c'; g.lineCap = 'round'; g.lineJoin = 'round';
     for (var t = 0; t < 70; t++){
       var x = Math.round(Math.random()*S/32)*32 + 16;
@@ -718,11 +802,9 @@ footer p{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
       }
       g.stroke();
     }
-    // plan de masse hachuré
     g.strokeStyle = 'rgba(185,131,60,.18)'; g.lineWidth = 3;
     for (var k = -S; k < S; k += 22){ g.beginPath(); g.moveTo(k, 0); g.lineTo(k + S, S); g.stroke(); }
 
-    // pastilles et vias
     for (var p = 0; p < 150; p++){
       var px = Math.round(Math.random()*S/32)*32 + 16, py = Math.round(Math.random()*S/32)*32 + 16;
       var r = Math.random() < .3 ? 11 : 7;
@@ -731,7 +813,6 @@ footer p{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
       g.fillStyle = '#0a2f23';
       g.beginPath(); g.arc(px, py, r*0.45, 0, Math.PI*2); g.fill();
     }
-    // sérigraphie
     g.fillStyle = 'rgba(236,243,247,.85)';
     g.font = 'bold 44px monospace';
     g.fillText('MOURAT NATHAN', 54, 92);
@@ -748,14 +829,9 @@ footer p{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
     return tex;
   }
 
-  var topTex = pcbTexture();
   var green = new THREE.MeshStandardMaterial({color:0x14543f, roughness:.75, metalness:.15});
-  var faced = new THREE.MeshStandardMaterial({map:topTex, roughness:.62, metalness:.2});
-  var boardMesh = new THREE.Mesh(
-    new THREE.BoxGeometry(5.2, 0.16, 5.2),
-    [green, green, faced, green, green, green]
-  );
-  board.add(boardMesh);
+  var faced = new THREE.MeshStandardMaterial({map:pcbTexture(), roughness:.62, metalness:.2});
+  board.add(new THREE.Mesh(new THREE.BoxGeometry(5.2, 0.16, 5.2), [green, green, faced, green, green, green]));
 
   var black = new THREE.MeshStandardMaterial({color:0x16191c, roughness:.5, metalness:.25});
   var gold  = new THREE.MeshStandardMaterial({color:0xc9983f, roughness:.32, metalness:.9});
@@ -764,31 +840,25 @@ footer p{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
 
   function add(mesh, x, y, z){ mesh.position.set(x, y, z); board.add(mesh); return mesh; }
 
-  // microcontrôleur + broches
-  var ic = add(new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.22, 1.5), black), -0.9, 0.19, -0.5);
+  add(new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.22, 1.5), black), -0.9, 0.19, -0.5);
   for (var pi = 0; pi < 12; pi++){
     var off = -0.65 + pi * 0.118;
-    add(new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.04, 0.22), silver), -0.9 + off, 0.10, -0.5 - 0.82);
-    add(new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.04, 0.22), silver), -0.9 + off, 0.10, -0.5 + 0.82);
+    add(new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.04, 0.22), silver), -0.9 + off, 0.10, -1.32);
+    add(new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.04, 0.22), silver), -0.9 + off, 0.10, 0.32);
   }
-  // petit circuit secondaire
   add(new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.16, 0.8), black), 1.35, 0.16, 1.15);
 
-  // condensateurs électrolytiques
   [[1.5,-1.35],[1.95,-0.75],[-1.7,1.5]].forEach(function(p){
-    var cap = add(new THREE.Mesh(new THREE.CylinderGeometry(0.26, 0.26, 0.62, 24), blue), p[0], 0.39, p[1]);
+    add(new THREE.Mesh(new THREE.CylinderGeometry(0.26, 0.26, 0.62, 24), blue), p[0], 0.39, p[1]);
     add(new THREE.Mesh(new THREE.CylinderGeometry(0.27, 0.27, 0.05, 24), silver), p[0], 0.70, p[1]);
-    return cap;
   });
 
-  // bornier et connecteur
-  var hdr = add(new THREE.Mesh(new THREE.BoxGeometry(2.1, 0.2, 0.34), black), 0.4, 0.18, 2.1);
+  add(new THREE.Mesh(new THREE.BoxGeometry(2.1, 0.2, 0.34), black), 0.4, 0.18, 2.1);
   for (var hp = 0; hp < 10; hp++){
     add(new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.42, 0.07), gold), -0.55 + hp*0.21, 0.42, 2.1);
   }
   add(new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.42, 0.5), blue), -1.85, 0.29, 2.0);
 
-  // résistances CMS
   var smd = new THREE.MeshStandardMaterial({color:0x1c1f22, roughness:.6, metalness:.1});
   for (var r2 = 0; r2 < 22; r2++){
     var rx = (Math.random()-0.5)*4.4, rz = (Math.random()-0.5)*4.4;
@@ -802,19 +872,16 @@ footer p{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
     e2.rotation.y = rot; e2.position.add(new THREE.Vector3(-Math.cos(rot)*0.105, 0, Math.sin(rot)*0.105));
   }
 
-  // LED de statut
   var ledMat = new THREE.MeshStandardMaterial({color:0xff9f2e, emissive:0xff8c00, emissiveIntensity:1.4, roughness:.3});
-  var led = add(new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.12, 18), ledMat), 1.95, 0.14, 1.95);
+  add(new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.12, 18), ledMat), 1.95, 0.14, 1.95);
   var ledLight = new THREE.PointLight(0xff9a2a, 1.1, 3.2);
   ledLight.position.set(1.95, 0.5, 1.95);
   board.add(ledLight);
 
-  // éclairage
   scene.add(new THREE.AmbientLight(0xffffff, 0.55));
   var key = new THREE.DirectionalLight(0xffffff, 1.15); key.position.set(4, 7, 5); scene.add(key);
   var rim = new THREE.DirectionalLight(0x7fb6e0, 0.5); rim.position.set(-5, 3, -4); scene.add(rim);
 
-  /* interaction */
   var rotY = -0.5, rotX = 0.62, targY = rotY, targX = rotX, dragging = false, px0 = 0, py0 = 0, auto = !reduced;
   function pointerDown(e){
     dragging = true; auto = false; canvas.classList.add('drag');
@@ -850,8 +917,7 @@ footer p{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
 
   var visible = true;
   if ('IntersectionObserver' in window){
-    new IntersectionObserver(function(en){ visible = en[0].isIntersecting; }, {threshold:0})
-      .observe(canvas);
+    new IntersectionObserver(function(en){ visible = en[0].isIntersecting; }, {threshold:0}).observe(canvas);
   }
 
   var t = 0;
