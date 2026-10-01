@@ -1,0 +1,876 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Portfolio Mourat Nathan</title>
+<meta name="description" content="Portfolio de Nathan Mourat, etudiant en Master 1 Energie a l'Universite de La Reunion. Automatisme, electrotechnique, photovoltaique. Recherche de stage avril - mi-juin 2027.">
+<meta name="author" content="Nathan Mourat">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%230d4432'/%3E%3Cpath d='M7 22V10h3l6 8v-8h3v12h-3l-6-8v8z' fill='%23d7a44f'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Portfolio Mourat Nathan">
+<meta property="og:description" content="Master 1 Energie a La Reunion. Automatisme, electrotechnique, photovoltaique. Recherche de stage 2027.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout : colonne de 1120px, hero en deux volets (texte + carte 3D), sections séparées
+   par un filet type plan électrique ; repères en mono, accent solaire sur fond papier froid. */
+:root{
+  --bg:#edf1f4;
+  --surface:#ffffff;
+  --surface-2:#e3e9ee;
+  --ink:#121a20;
+  --muted:#5a6b78;
+  --line:#c6d2db;
+  --accent:#d97400;
+  --signal:#17618f;
+  --shadow:0 10px 30px rgba(18,26,32,.10);
+
+  --display:'Chivo','Helvetica Neue',Arial,sans-serif;
+  --body:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
+  --mono:'IBM Plex Mono','SFMono-Regular',Consolas,monospace;
+
+  --maxw:1120px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0d1317; --surface:#151e24; --surface-2:#1d282f;
+    --ink:#e7eef3; --muted:#95a7b3; --line:#2b3942;
+    --accent:#ff9f2e; --signal:#63b2e2;
+    --shadow:0 10px 30px rgba(0,0,0,.45);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0d1317; --surface:#151e24; --surface-2:#1d282f;
+  --ink:#e7eef3; --muted:#95a7b3; --line:#2b3942;
+  --accent:#ff9f2e; --signal:#63b2e2;
+  --shadow:0 10px 30px rgba(0,0,0,.45);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:var(--body); font-size:16px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%}
+a{color:var(--signal)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding-inline:20px}
+
+/* ---- barre de navigation ---- */
+.topbar{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:30;
+  background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.topbar .wrap{display:flex;align-items:center;gap:14px;min-height:58px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:900;letter-spacing:-.02em;font-size:1.02rem;text-transform:uppercase;margin-right:auto}
+.brand span{color:var(--accent)}
+.nav{display:flex;gap:18px;flex-wrap:wrap}
+.nav a{font-family:var(--mono);font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav a:hover,.nav a.on{color:var(--ink)}
+.nav a.on{color:var(--accent)}
+#themeBtn{
+  background:transparent;border:1px solid var(--line);color:var(--muted);cursor:pointer;
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;
+  transition:border-color .2s,color .2s;
+}
+#themeBtn:hover{border-color:var(--accent);color:var(--accent)}
+#progress{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--accent);transition:width .12s linear}
+@media (max-width:700px){
+  .topbar .wrap{min-height:0;padding-block:9px 0;gap:10px}
+  .brand{flex:1 1 auto;font-size:.95rem}
+  .nav{order:3;flex:1 0 100%;flex-wrap:nowrap;overflow-x:auto;gap:18px;padding-bottom:9px;scrollbar-width:none}
+  .nav::-webkit-scrollbar{display:none}
+  .nav a{white-space:nowrap}
+}
+
+/* ---- hero ---- */
+.hero{padding-block:52px 40px;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+@media (max-width:860px){.hero{grid-template-columns:1fr;gap:28px;padding-block:40px 32px}}
+.hero>*{min-width:0}
+.eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 18px}
+h1{font-family:var(--display);font-weight:900;letter-spacing:-.035em;line-height:.92;font-size:clamp(2.6rem,7.5vw,4.8rem);margin:0;text-wrap:balance}
+h1 .thin{display:block;font-weight:400;color:var(--muted);font-size:.36em;letter-spacing:-.01em;margin-top:.6em;line-height:1.25}
+.lead{max-width:58ch;margin:24px 0 0;font-size:1.05rem}
+.status{
+  display:inline-flex;align-items:center;gap:10px;margin-top:24px;
+  background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);
+  padding:10px 16px;font-family:var(--mono);font-size:.78rem;line-height:1.4;
+}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none;box-shadow:0 0 0 0 var(--accent);animation:pulse 2.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 55%,transparent)}70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+
+/* ---- carte 3D ---- */
+.board{position:relative;width:100%;aspect-ratio:1/1;max-width:100%;max-height:70vh;margin-inline:auto}
+@media (max-width:860px){.board{aspect-ratio:4/3;max-width:460px}}
+#pcb{width:100%;height:100%;display:block;cursor:grab;touch-action:pan-y}
+#pcb.drag{cursor:grabbing}
+.board-cap{
+  position:absolute;left:0;bottom:0;font-family:var(--mono);font-size:.66rem;color:var(--muted);
+  letter-spacing:.08em;text-transform:uppercase;pointer-events:none;
+}
+.board-fallback{display:grid;place-items:center;height:100%;border:1px dashed var(--line);color:var(--muted);font-family:var(--mono);font-size:.75rem;text-align:center;padding:20px}
+
+/* ---- chiffres ---- */
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:8px}
+.fact{background:var(--surface);padding:16px 18px;min-width:0}
+.fact dt{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+.fact dd{margin:0;font-weight:600;font-size:.96rem}
+.fact .big{font-family:var(--display);font-weight:900;font-size:2rem;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.fact .big small{font-size:.44em;font-weight:400;color:var(--muted);margin-left:6px;letter-spacing:0}
+
+/* ---- sections ---- */
+section{padding-block:52px;border-top:1px solid var(--line)}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:28px;flex-wrap:wrap}
+.sec-head h2{font-family:var(--display);font-weight:700;letter-spacing:-.02em;font-size:clamp(1.5rem,3.6vw,2.1rem);margin:0;text-wrap:balance}
+.sec-ref{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+
+.two-col{display:grid;grid-template-columns:1.1fr .9fr;gap:36px}
+@media (max-width:760px){.two-col{grid-template-columns:1fr}}
+.two-col>*{min-width:0}
+
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px}
+.skill-group h3{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:0 0 10px;font-weight:500}
+.skill-group ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.skill-group li{font-size:.95rem;padding-left:16px;position:relative}
+.skill-group li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:1px;background:var(--muted)}
+
+/* ---- projets ---- */
+.project{display:grid;gap:24px;margin-bottom:52px}
+.project:last-child{margin-bottom:0}
+.project-head{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
+.project-num{font-family:var(--mono);font-size:.78rem;color:var(--accent);letter-spacing:.08em}
+.project h3{font-family:var(--display);font-weight:700;font-size:1.3rem;margin:0;letter-spacing:-.015em}
+.project .tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:3px 8px}
+.project p{margin:0;max-width:62ch}
+.steps{display:grid;gap:18px}
+.step{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+.step-n{font-family:var(--mono);font-size:1.5rem;font-weight:500;color:var(--line);line-height:1}
+.step h4{margin:0 0 4px;font-size:1rem;font-weight:600}
+.step p{margin:0;color:var(--muted);font-size:.94rem}
+
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+figure{margin:0;background:var(--surface);border:1px solid var(--line);min-width:0;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+figure img{width:100%;height:auto;cursor:zoom-in}
+figure:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--accent)}
+figcaption{font-family:var(--mono);font-size:.68rem;color:var(--muted);padding:8px 10px;border-top:1px solid var(--line);line-height:1.4}
+.wide{grid-column:1/-1}
+
+/* ---- parcours ---- */
+.timeline{display:grid;border-top:1px solid var(--line)}
+.entry{display:grid;grid-template-columns:150px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid var(--line)}
+@media (max-width:640px){.entry{grid-template-columns:1fr;gap:6px}}
+.entry>*{min-width:0}
+.entry .when{font-family:var(--mono);font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.entry h3{margin:0 0 4px;font-size:1.02rem;font-weight:600}
+.entry p{margin:0;color:var(--muted);font-size:.94rem}
+
+/* ---- contact ---- */
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.card{background:var(--surface);padding:18px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.card .label{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.card .note{font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+.card .value{font-size:.98rem;font-weight:500;word-break:break-word;font-variant-numeric:tabular-nums}
+.tel-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.copy{
+  background:var(--surface-2);color:var(--ink);border:1px solid var(--line);
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:4px 9px;cursor:pointer;transition:border-color .2s,color .2s;
+}
+.copy:hover{border-color:var(--accent);color:var(--accent)}
+.copy.ok{border-color:var(--accent);color:var(--accent)}
+.card>.copy{align-self:flex-start}
+
+footer{border-top:1px solid var(--line);padding-block:26px 40px}
+footer p{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+
+/* ---- apparition ---- */
+.pre{opacity:0;transform:translateY(16px)}
+[data-reveal]{transition:opacity .6s ease,transform .6s ease}
+
+/* ---- visionneuse ---- */
+#lightbox{position:fixed;inset:0;z-index:60;background:rgba(8,12,15,.92);display:grid;place-items:center;padding:24px}
+#lightbox img{max-width:min(100%,1200px);max-height:85vh;width:auto;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+#lightbox .lb-cap{position:absolute;left:0;right:0;bottom:22px;text-align:center;color:#cfd8de;font-family:var(--mono);font-size:.74rem;padding-inline:20px}
+#lbClose{position:absolute;top:16px;right:18px;background:transparent;border:1px solid rgba(255,255,255,.35);color:#fff;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px;cursor:pointer}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .pre{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand">Mourat <span>Nathan</span></div>
+    <nav class="nav">
+      <a href="#profil">Profil</a>
+      <a href="#competences">Compétences</a>
+      <a href="#projets">Projets</a>
+      <a href="#parcours">Parcours</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button id="themeBtn" type="button" aria-label="Changer de thème">Thème</button>
+  </div>
+  <div id="progress"></div>
+</header>
+
+<main>
+
+<div class="wrap hero" id="profil">
+  <div>
+    <p class="eyebrow">Master 1 Énergie — Université de La Réunion</p>
+    <h1>Portfolio
+      <span class="thin">Photovoltaïque, réseaux DC et automatisme</span>
+    </h1>
+    <p class="lead">
+      Après un BUT GEII spécialité Automatisme et informatique industrielle à l'IUT de Nantes,
+      je poursuis en Master 1 Énergie à Saint-Denis de La Réunion. Je viens de l'armoire électrique :
+      schéma, câblage, automate, variateur, IHM. Je m'oriente aujourd'hui vers le solaire,
+      les réseaux en courant continu et le stockage.
+    </p>
+    <p class="status"><span class="dot"></span> Recherche un stage en photovoltaïque — avril à mi-juin 2027</p>
+  </div>
+
+  <div class="board">
+    <canvas id="pcb" aria-label="Carte électronique en trois dimensions, en rotation"></canvas>
+    <div id="pcbFallback" class="board-fallback" hidden>Carte 3D indisponible sur ce navigateur</div>
+    <span class="board-cap">Glisser pour faire tourner</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <dl class="facts" data-reveal>
+    <div class="fact"><dt>Semaines en entreprise</dt><dd class="big" data-count="24">24</dd></div>
+    <div class="fact"><dt>Durée du stage visé</dt><dd class="big" data-count="10">10<small>semaines</small></dd></div>
+    <div class="fact"><dt>Période</dt><dd class="big">avril<small>mi-juin 2027</small></dd></div>
+    <div class="fact"><dt>Mobilité</dt><dd class="big">3<small>zones</small></dd></div>
+  </dl>
+
+<section id="recherche">
+  <div class="sec-head">
+    <h2>Ce que je cherche</h2>
+    <span class="sec-ref">Stage M1 · 2027</span>
+  </div>
+  <div class="two-col" data-reveal>
+    <div>
+      <p>
+        Un stage d'environ dix semaines, d'avril à mi-juin 2027, sur un sujet photovoltaïque :
+        dimensionnement et simulation d'installations, suivi de production et analyse de performance,
+        architectures en courant continu, couplage PV–stockage, ou qualité et protection des réseaux.
+      </p>
+      <p style="margin-top:14px">
+        L'automatisme reste mon point d'appui : je sais lire et produire un schéma, câbler une armoire,
+        programmer un automate et instrumenter un banc d'essai. C'est ce que j'apporte sur un projet solaire,
+        du prototype à la mise en service.
+      </p>
+    </div>
+    <div class="skills">
+      <div class="skill-group">
+        <h3>Terrains visés</h3>
+        <ul>
+          <li>Bureaux d'études et installateurs PV</li>
+          <li>Producteurs et exploitants d'actifs solaires</li>
+          <li>Laboratoires et centres de recherche énergie</li>
+          <li>Fabricants d'onduleurs et de stockage</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="competences">
+  <div class="sec-head">
+    <h2>Compétences</h2>
+    <span class="sec-ref">Techniques et outils</span>
+  </div>
+  <div class="skills" data-reveal>
+    <div class="skill-group">
+      <h3>Automatisme</h3>
+      <ul>
+        <li>GRAFCET, Ladder, FBD, ST</li>
+        <li>Automates programmables</li>
+        <li>Variateurs de vitesse</li>
+        <li>Programmation et paramétrage d'IHM</li>
+        <li>Omron Sysmac Studio</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h3>Électrotechnique</h3>
+      <ul>
+        <li>Schémas de puissance et de commande</li>
+        <li>Câblage d'armoire et repérage</li>
+        <li>Tests de continuité et diagnostic</li>
+        <li>Capteurs et chaînes de mesure</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h3>Conception et calcul</h3>
+      <ul>
+        <li>SEE Electrical, XRelais</li>
+        <li>Python</li>
+        <li>Fiches de tests et procédures de validation</li>
+        <li>Bilans énergétiques</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h3>Langues</h3>
+      <ul>
+        <li>Français — langue maternelle</li>
+        <li>Anglais — technique, lu, écrit, parlé</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="projets">
+  <div class="sec-head">
+    <h2>Projets</h2>
+    <span class="sec-ref">BUT GEII · 2022—2026</span>
+  </div>
+
+  <article class="project" data-reveal>
+    <div class="project-head">
+      <span class="project-num">P1</span>
+      <h3>Câblages électriques</h3>
+      <span class="tag">Concevoir</span>
+    </div>
+    <p>
+      Sur chaque projet, en cours comme en entreprise, tout part du schéma. C'est la base du travail
+      et ce qui rend le câblage rapide et vérifiable ensuite.
+    </p>
+    <div class="steps">
+      <div class="step">
+        <span class="step-n">01</span>
+        <div>
+          <h4>Schéma électrique</h4>
+          <p>Tracé des circuits de puissance et de commande, repérage des bornes et des conducteurs, choix des protections.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-n">02</span>
+        <div>
+          <h4>Câblage</h4>
+          <p>Réalisation dans l'armoire en suivant le schéma. Quand le schéma présente un défaut, il faut retomber sur un câblage normé à partir de l'expérience.</p>
+        </div>
+      </div>
+    </div>
+    <div class="shots">
+      <figure><img src="schema_laptop.jpg" alt="Schéma électrique de commande tracé sur ordinateur" loading="lazy" width="564" height="278"><figcaption>Schéma de commande — logiciel de CAO électrique</figcaption></figure>
+      <figure><img src="cablage_photo.jpg" alt="Mesure sur un disjoncteur dans une armoire électrique" loading="lazy" width="520" height="540"><figcaption>Contrôle sur borniers en armoire</figcaption></figure>
+      <figure class="wide"><img src="schema_grand.jpg" alt="Schéma électrique complet d'une installation automatisée" loading="lazy" width="1064" height="540"><figcaption>Schéma complet d'une installation automatisée — puissance et commande</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="project" data-reveal>
+    <div class="project-head">
+      <span class="project-num">P2</span>
+      <h3>Fiche de tests et tests de continuité</h3>
+      <span class="tag">Vérifier</span>
+    </div>
+    <p>
+      La fiche de tests sert à confronter le programme à toutes les situations prévues : entrées sollicitées,
+      résultat attendu, résultat obtenu, conclusion. Les tests de continuité, eux, ont permis de corriger
+      des défauts physiques restés invisibles au programme sur les projets SAE4 et SAE5.
+    </p>
+    <div class="shots">
+      <figure><img src="fiche_tests.jpg" alt="Fiche de tests du programme listant scénarios et résultats attendus" loading="lazy" width="404" height="460"><figcaption>Fiche de tests — scénarios, résultat attendu, résultat obtenu</figcaption></figure>
+      <figure><img src="armoire1.jpg" alt="Essais sur un banc avec pupitre de commande et armoire" loading="lazy" width="344" height="454"><figcaption>Essais au banc avec pupitre de commande</figcaption></figure>
+      <figure><img src="ihm.jpg" alt="Afficheur d'un relais programmable indiquant l'étage et le mode auto" loading="lazy" width="344" height="202"><figcaption>Retour d'état sur relais programmable</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="project" data-reveal>
+    <div class="project-head">
+      <span class="project-num">P3</span>
+      <h3>Stage chez Agis</h3>
+      <span class="tag">Maintenir et intégrer</span>
+    </div>
+    <p>
+      Vingt-quatre semaines en entreprise sur les deux dernières années du BUT, en agroalimentaire.
+      Maintenance d'informatique industrielle en deuxième année, puis intégration complète d'un
+      équipement en troisième année.
+    </p>
+    <div class="steps">
+      <div class="step">
+        <span class="step-n">01</span>
+        <div>
+          <h4>Maintenir</h4>
+          <p>Remise en état d'un poste industriel et recherche de solutions pour le fiabiliser dans la durée.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-n">02</span>
+        <div>
+          <h4>Intégrer</h4>
+          <p>Projet BERIEF : développement et intégration d'un ensemble automate, variateur et IHM sur une machine de production.</p>
+        </div>
+      </div>
+    </div>
+    <div class="shots">
+      <figure><img src="agis_laptop.jpg" alt="Vue aérienne du site industriel Agis" loading="lazy" width="550" height="330"><figcaption>Site de production — Agis</figcaption></figure>
+      <figure><img src="sysmac.jpg" alt="Programmation dans le logiciel Omron Sysmac Studio" loading="lazy" width="550" height="330"><figcaption>Développement du programme sous Sysmac Studio</figcaption></figure>
+      <figure><img src="malaxeur.jpg" alt="Machine de malaxage agroalimentaire" loading="lazy" width="344" height="234"><figcaption>Type d'équipement traité en production</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="project" data-reveal>
+    <div class="project-head">
+      <span class="project-num">P4</span>
+      <h3>Travaux pratiques et prototypes</h3>
+      <span class="tag">Réaliser</span>
+    </div>
+    <p>
+      Projets de formation : robot mobile instrumenté, bancs d'automatisme avec capteurs de position,
+      pupitres et armoires montés puis mis en service.
+    </p>
+    <div class="shots">
+      <figure><img src="robot.jpg" alt="Robot mobile à deux roues avec carte électronique et batteries" loading="lazy" width="344" height="202"><figcaption>Robot mobile instrumenté</figcaption></figure>
+      <figure><img src="armoire2.jpg" alt="Armoire d'automatisme pédagogique en atelier" loading="lazy" width="344" height="234"><figcaption>Banc d'automatisme en atelier</figcaption></figure>
+    </div>
+  </article>
+</section>
+
+<section id="parcours">
+  <div class="sec-head">
+    <h2>Parcours</h2>
+    <span class="sec-ref">Formation et expérience</span>
+  </div>
+  <div class="timeline" data-reveal>
+    <div class="entry">
+      <div class="when">2026 — 2027</div>
+      <div>
+        <h3>Master 1 Énergie — Université de La Réunion</h3>
+        <p>UFR Sciences et Technologies, campus du Moufia, Saint-Denis.</p>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="when">2022 — 2026</div>
+      <div>
+        <h3>BUT GEII — IUT de Nantes</h3>
+        <p>Génie électrique et informatique industrielle, parcours Automatisme et informatique industrielle.</p>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="when">2024 — 2026</div>
+      <div>
+        <h3>Stages chez Agis — 24 semaines</h3>
+        <p>Maintenance d'informatique industrielle, puis projet BERIEF : automate, variateur et IHM intégrés sur machine.</p>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="when">2022</div>
+      <div>
+        <h3>Baccalauréat</h3>
+        <p>Entrée en BUT GEII à la suite du baccalauréat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="sec-head">
+    <h2>Contact</h2>
+    <span class="sec-ref">Disponible pour un stage 2027</span>
+  </div>
+  <div class="contact-grid" data-reveal>
+    <div class="card">
+      <span class="label">E-mail</span>
+      <span class="value" id="v-mail">nathanmourat6@gmail.com</span>
+      <button class="copy" type="button" data-copy="v-mail">Copier</button>
+    </div>
+    <div class="card">
+      <span class="label">Téléphone</span>
+      <div class="tel-row">
+        <span class="value" id="v-tel1">06 93 52 26 66</span>
+        <button class="copy" type="button" data-copy="v-tel1">Copier</button>
+      </div>
+      <div class="tel-row">
+        <span class="value" id="v-tel2">07 68 25 78 16</span>
+        <button class="copy" type="button" data-copy="v-tel2">Copier</button>
+      </div>
+      <span class="note">Les deux numéros sont actifs</span>
+    </div>
+    <div class="card">
+      <span class="label">LinkedIn</span>
+      <span class="value"><a href="https://www.linkedin.com/in/nathan-mourat-ba54a3183" target="_blank" rel="noopener">nathan-mourat</a></span>
+      <span class="note">Profil professionnel et actualités</span>
+    </div>
+    <div class="card">
+      <span class="label">Localisation</span>
+      <span class="value">Saint-Denis, La Réunion</span>
+      <span class="note">Mobile en Europe et au Royaume-Uni</span>
+    </div>
+  </div>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Mourat Nathan — Master 1 Énergie, Université de La Réunion. Portfolio mis à jour en octobre 2026.</p>
+  </div>
+</footer>
+
+<div id="lightbox" hidden>
+  <button id="lbClose" type="button">Fermer</button>
+  <img id="lbImg" src="" alt="">
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+  'use strict';
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- thème ---------- */
+  var themeBtn = document.getElementById('themeBtn');
+  function stored(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function store(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  var saved = stored('theme');
+  if (saved === 'dark' || saved === 'light') document.documentElement.setAttribute('data-theme', saved);
+  function isDark(){
+    var a = document.documentElement.getAttribute('data-theme');
+    if (a) return a === 'dark';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  function syncBtn(){ themeBtn.textContent = isDark() ? 'Clair' : 'Sombre'; }
+  syncBtn();
+  themeBtn.addEventListener('click', function(){
+    var next = isDark() ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    store('theme', next);
+    syncBtn();
+  });
+
+  /* ---------- barre de progression + nav active ---------- */
+  var bar = document.getElementById('progress');
+  var links = [].slice.call(document.querySelectorAll('.nav a'));
+  var targets = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  var ticking = false;
+  function onScroll(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+      var best = -1, bestTop = -Infinity;
+      for (var i = 0; i < targets.length; i++){
+        if (!targets[i]) continue;
+        var t = targets[i].getBoundingClientRect().top - 90;
+        if (t <= 0 && t > bestTop){ bestTop = t; best = i; }
+      }
+      links.forEach(function(a,i){ a.classList.toggle('on', i === best); });
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* ---------- apparition au défilement ---------- */
+  if (!reduced && 'IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.remove('pre'); io.unobserve(e.target); }
+      });
+    }, {rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('[data-reveal]').forEach(function(el){
+      if (el.getBoundingClientRect().top > window.innerHeight){
+        el.classList.add('pre');
+        io.observe(el);
+      }
+    });
+  }
+
+  /* ---------- compteurs ---------- */
+  var counters = [].slice.call(document.querySelectorAll('[data-count]'));
+  if (!reduced && counters.length && 'IntersectionObserver' in window){
+    var cio = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        cio.unobserve(e.target);
+        var el = e.target;
+        var end = parseInt(el.getAttribute('data-count'), 10);
+        var suffix = el.querySelector('small');
+        var tail = suffix ? suffix.outerHTML : '';
+        var t0 = null, dur = 900;
+        function step(ts){
+          if (!t0) t0 = ts;
+          var p = Math.min((ts - t0) / dur, 1);
+          var v = Math.round(end * (1 - Math.pow(1 - p, 3)));
+          el.innerHTML = v + tail;
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }, {threshold:.4});
+    counters.forEach(function(el){ cio.observe(el); });
+  }
+
+  /* ---------- copier ---------- */
+  document.querySelectorAll('.copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var el = document.getElementById(btn.getAttribute('data-copy'));
+      if (!el) return;
+      var txt = el.textContent.trim();
+      function done(){
+        var old = btn.textContent;
+        btn.textContent = 'Copié';
+        btn.classList.add('ok');
+        setTimeout(function(){ btn.textContent = old; btn.classList.remove('ok'); }, 1600);
+      }
+      function fallback(){
+        try{
+          var r = document.createRange();
+          r.selectNodeContents(el);
+          var s = window.getSelection();
+          s.removeAllRanges(); s.addRange(r);
+        }catch(e){}
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(txt).then(done, fallback);
+      } else { fallback(); }
+    });
+  });
+
+  /* ---------- visionneuse d'images ---------- */
+  var lb = document.getElementById('lightbox'),
+      lbImg = document.getElementById('lbImg'),
+      lbCap = document.getElementById('lbCap'),
+      lastFocus = null;
+  function openLb(img){
+    lastFocus = document.activeElement;
+    lbImg.src = img.getAttribute('src');
+    lbImg.alt = img.getAttribute('alt') || '';
+    var fc = img.parentElement.querySelector('figcaption');
+    lbCap.textContent = fc ? fc.textContent : '';
+    lb.hidden = false;
+    document.getElementById('lbClose').focus();
+  }
+  function closeLb(){
+    lb.hidden = true;
+    lbImg.src = '';
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  document.querySelectorAll('figure img').forEach(function(img){
+    img.addEventListener('click', function(){ openLb(img); });
+  });
+  lb.addEventListener('click', function(e){ if (e.target !== lbImg) closeLb(); });
+  document.getElementById('lbClose').addEventListener('click', closeLb);
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !lb.hidden) closeLb(); });
+
+  /* ---------- carte électronique 3D ---------- */
+  var canvas = document.getElementById('pcb');
+  var fallback = document.getElementById('pcbFallback');
+  if (typeof THREE === 'undefined'){ canvas.hidden = true; fallback.hidden = false; return; }
+
+  var renderer;
+  try{
+    renderer = new THREE.WebGLRenderer({canvas:canvas, antialias:true, alpha:true});
+  }catch(err){
+    canvas.hidden = true; fallback.hidden = false; return;
+  }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
+  camera.position.set(0, 6.4, 7.6);
+  camera.lookAt(0, 0, 0);
+
+  var board = new THREE.Group();
+  scene.add(board);
+
+  /* texture du circuit imprimé, dessinée au canvas 2D */
+  function pcbTexture(){
+    var S = 1024, c = document.createElement('canvas');
+    c.width = c.height = S;
+    var g = c.getContext('2d');
+    g.fillStyle = '#0d4432'; g.fillRect(0, 0, S, S);
+    g.fillStyle = 'rgba(255,255,255,.03)';
+    for (var i = 0; i < 2600; i++){ g.fillRect(Math.random()*S, Math.random()*S, 1, 1); }
+
+    // pistes cuivre
+    g.strokeStyle = '#b9833c'; g.lineCap = 'round'; g.lineJoin = 'round';
+    for (var t = 0; t < 70; t++){
+      var x = Math.round(Math.random()*S/32)*32 + 16;
+      var y = Math.round(Math.random()*S/32)*32 + 16;
+      g.lineWidth = Math.random() < .25 ? 9 : 5;
+      g.beginPath(); g.moveTo(x, y);
+      var segs = 2 + ((Math.random()*4)|0);
+      for (var s2 = 0; s2 < segs; s2++){
+        var len = (1 + ((Math.random()*5)|0)) * 32;
+        if (Math.random() < .5) x += Math.random() < .5 ? len : -len;
+        else y += Math.random() < .5 ? len : -len;
+        x = Math.max(24, Math.min(S-24, x)); y = Math.max(24, Math.min(S-24, y));
+        g.lineTo(x, y);
+      }
+      g.stroke();
+    }
+    // plan de masse hachuré
+    g.strokeStyle = 'rgba(185,131,60,.18)'; g.lineWidth = 3;
+    for (var k = -S; k < S; k += 22){ g.beginPath(); g.moveTo(k, 0); g.lineTo(k + S, S); g.stroke(); }
+
+    // pastilles et vias
+    for (var p = 0; p < 150; p++){
+      var px = Math.round(Math.random()*S/32)*32 + 16, py = Math.round(Math.random()*S/32)*32 + 16;
+      var r = Math.random() < .3 ? 11 : 7;
+      g.fillStyle = '#d7a44f';
+      g.beginPath(); g.arc(px, py, r, 0, Math.PI*2); g.fill();
+      g.fillStyle = '#0a2f23';
+      g.beginPath(); g.arc(px, py, r*0.45, 0, Math.PI*2); g.fill();
+    }
+    // sérigraphie
+    g.fillStyle = 'rgba(236,243,247,.85)';
+    g.font = 'bold 44px monospace';
+    g.fillText('MOURAT NATHAN', 54, 92);
+    g.font = '28px monospace';
+    g.fillStyle = 'rgba(236,243,247,.62)';
+    g.fillText('M1 ENERGIE  /  GEII-AII', 56, 136);
+    g.fillText('REV 2027', 56, S - 56);
+    g.fillText('PV / DC', S - 230, S - 56);
+    g.strokeStyle = 'rgba(236,243,247,.45)'; g.lineWidth = 4;
+    g.strokeRect(26, 26, S-52, S-52);
+
+    var tex = new THREE.CanvasTexture(c);
+    tex.anisotropy = 4;
+    return tex;
+  }
+
+  var topTex = pcbTexture();
+  var green = new THREE.MeshStandardMaterial({color:0x14543f, roughness:.75, metalness:.15});
+  var faced = new THREE.MeshStandardMaterial({map:topTex, roughness:.62, metalness:.2});
+  var boardMesh = new THREE.Mesh(
+    new THREE.BoxGeometry(5.2, 0.16, 5.2),
+    [green, green, faced, green, green, green]
+  );
+  board.add(boardMesh);
+
+  var black = new THREE.MeshStandardMaterial({color:0x16191c, roughness:.5, metalness:.25});
+  var gold  = new THREE.MeshStandardMaterial({color:0xc9983f, roughness:.32, metalness:.9});
+  var silver= new THREE.MeshStandardMaterial({color:0xaeb6bd, roughness:.3, metalness:.95});
+  var blue  = new THREE.MeshStandardMaterial({color:0x1d3f66, roughness:.45, metalness:.3});
+
+  function add(mesh, x, y, z){ mesh.position.set(x, y, z); board.add(mesh); return mesh; }
+
+  // microcontrôleur + broches
+  var ic = add(new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.22, 1.5), black), -0.9, 0.19, -0.5);
+  for (var pi = 0; pi < 12; pi++){
+    var off = -0.65 + pi * 0.118;
+    add(new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.04, 0.22), silver), -0.9 + off, 0.10, -0.5 - 0.82);
+    add(new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.04, 0.22), silver), -0.9 + off, 0.10, -0.5 + 0.82);
+  }
+  // petit circuit secondaire
+  add(new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.16, 0.8), black), 1.35, 0.16, 1.15);
+
+  // condensateurs électrolytiques
+  [[1.5,-1.35],[1.95,-0.75],[-1.7,1.5]].forEach(function(p){
+    var cap = add(new THREE.Mesh(new THREE.CylinderGeometry(0.26, 0.26, 0.62, 24), blue), p[0], 0.39, p[1]);
+    add(new THREE.Mesh(new THREE.CylinderGeometry(0.27, 0.27, 0.05, 24), silver), p[0], 0.70, p[1]);
+    return cap;
+  });
+
+  // bornier et connecteur
+  var hdr = add(new THREE.Mesh(new THREE.BoxGeometry(2.1, 0.2, 0.34), black), 0.4, 0.18, 2.1);
+  for (var hp = 0; hp < 10; hp++){
+    add(new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.42, 0.07), gold), -0.55 + hp*0.21, 0.42, 2.1);
+  }
+  add(new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.42, 0.5), blue), -1.85, 0.29, 2.0);
+
+  // résistances CMS
+  var smd = new THREE.MeshStandardMaterial({color:0x1c1f22, roughness:.6, metalness:.1});
+  for (var r2 = 0; r2 < 22; r2++){
+    var rx = (Math.random()-0.5)*4.4, rz = (Math.random()-0.5)*4.4;
+    if (Math.abs(rx + 0.9) < 1.1 && Math.abs(rz + 0.5) < 1.1) continue;
+    var rot = Math.random() < .5 ? 0 : Math.PI/2;
+    var res = add(new THREE.Mesh(new THREE.BoxGeometry(0.26, 0.07, 0.12), smd), rx, 0.115, rz);
+    res.rotation.y = rot;
+    var e1 = add(new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.075, 0.125), silver), rx, 0.115, rz);
+    e1.rotation.y = rot; e1.position.add(new THREE.Vector3(Math.cos(rot)*0.105, 0, -Math.sin(rot)*0.105));
+    var e2 = add(new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.075, 0.125), silver), rx, 0.115, rz);
+    e2.rotation.y = rot; e2.position.add(new THREE.Vector3(-Math.cos(rot)*0.105, 0, Math.sin(rot)*0.105));
+  }
+
+  // LED de statut
+  var ledMat = new THREE.MeshStandardMaterial({color:0xff9f2e, emissive:0xff8c00, emissiveIntensity:1.4, roughness:.3});
+  var led = add(new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.12, 18), ledMat), 1.95, 0.14, 1.95);
+  var ledLight = new THREE.PointLight(0xff9a2a, 1.1, 3.2);
+  ledLight.position.set(1.95, 0.5, 1.95);
+  board.add(ledLight);
+
+  // éclairage
+  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+  var key = new THREE.DirectionalLight(0xffffff, 1.15); key.position.set(4, 7, 5); scene.add(key);
+  var rim = new THREE.DirectionalLight(0x7fb6e0, 0.5); rim.position.set(-5, 3, -4); scene.add(rim);
+
+  /* interaction */
+  var rotY = -0.5, rotX = 0.62, targY = rotY, targX = rotX, dragging = false, px0 = 0, py0 = 0, auto = !reduced;
+  function pointerDown(e){
+    dragging = true; auto = false; canvas.classList.add('drag');
+    var p = e.touches ? e.touches[0] : e;
+    px0 = p.clientX; py0 = p.clientY;
+  }
+  function pointerMove(e){
+    if (!dragging) return;
+    var p = e.touches ? e.touches[0] : e;
+    targY += (p.clientX - px0) * 0.008;
+    targX += (p.clientY - py0) * 0.006;
+    targX = Math.max(0.12, Math.min(1.35, targX));
+    px0 = p.clientX; py0 = p.clientY;
+  }
+  function pointerUp(){ dragging = false; canvas.classList.remove('drag'); }
+  canvas.addEventListener('mousedown', pointerDown);
+  window.addEventListener('mousemove', pointerMove);
+  window.addEventListener('mouseup', pointerUp);
+  canvas.addEventListener('touchstart', pointerDown, {passive:true});
+  canvas.addEventListener('touchmove', pointerMove, {passive:true});
+  canvas.addEventListener('touchend', pointerUp);
+
+  function resize(){
+    var w = canvas.clientWidth, h = canvas.clientHeight;
+    if (!w || !h) return;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(resize).observe(canvas);
+  window.addEventListener('resize', resize);
+  resize();
+
+  var visible = true;
+  if ('IntersectionObserver' in window){
+    new IntersectionObserver(function(en){ visible = en[0].isIntersecting; }, {threshold:0})
+      .observe(canvas);
+  }
+
+  var t = 0;
+  function frame(){
+    requestAnimationFrame(frame);
+    if (!visible) return;
+    t += 0.016;
+    if (auto) targY += 0.0035;
+    rotY += (targY - rotY) * 0.08;
+    rotX += (targX - rotX) * 0.08;
+    board.rotation.y = rotY;
+    board.rotation.x = rotX;
+    board.position.y = Math.sin(t * 0.9) * 0.07;
+    ledMat.emissiveIntensity = 1.0 + Math.sin(t * 2.4) * 0.55;
+    ledLight.intensity = 0.8 + Math.sin(t * 2.4) * 0.45;
+    renderer.render(scene, camera);
+  }
+  frame();
+})();
+</script>
+</body>
+</html>
