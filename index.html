@@ -127,18 +127,19 @@ a{color:inherit}
 /* ---- hero ---- */
 .hero{position:relative;padding-top:calc(var(--headh) + clamp(28px,6vh,72px));padding-bottom:clamp(40px,7vh,88px)}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:clamp(32px,5vw,64px);align-items:center}
+.hero-copy{container-type:inline-size}
 @media (max-width:900px){.hero-grid{grid-template-columns:minmax(0,1fr)}}
 .eyebrow{display:flex;align-items:center;gap:12px;margin:0 0 22px;font:500 .72rem/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .eyebrow .idx{color:var(--accent)}
 .eyebrow::after{content:"";flex:0 0 48px;height:1px;background:var(--line-2)}
 .hero-title{
   margin:0;font-family:var(--display);font-weight:800;font-size:clamp(3rem,7.2vw,6.8rem);line-height:.86;
+  font-size:clamp(2.6rem,20cqi,6.8rem); /* « MOURAT. » ≈ 4,76 em : 20 % de la colonne garantit une seule ligne */
   letter-spacing:-.035em;text-transform:uppercase;font-variation-settings:"wdth" var(--wdth,100);
 }
-@media (max-width:900px){.hero-title{font-size:clamp(3rem,15vw,7rem)}}
 @media (max-width:600px){.eyebrow::after{display:none}}
 @media (max-width:440px){.brand > span:last-child{display:none}}
-.hero-title .line{display:block;overflow:hidden;padding-bottom:.06em;margin-bottom:-.06em}
+.hero-title .line{display:block;overflow:hidden;white-space:nowrap;padding-bottom:.06em;margin-bottom:-.06em}
 .hero-title .word,.hero-title .ch{display:inline-block}
 .hero-title .dot{color:var(--accent)}
 .ticker{margin:28px 0 0;font:600 clamp(1.15rem,1.9vw,1.5rem)/1.25 var(--display);font-variation-settings:"wdth" 92}
@@ -1447,8 +1448,6 @@ textarea.input{min-height:150px;resize:vertical}
     .to('#blade', { rotation: 0, duration: 0.5, ease: 'back.out(2.2)' }, 1.95)
     .call(plant.start, null, 2.3)
     .fromTo('.marquee', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.8 }, 1.1);
-
-  gsap.to('.hero-title', { yPercent: -14, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
 
   /* ---------- titres de section : filet tracé + largeur de police qui s'ouvre ---------- */
   $$('.sec-head').forEach(function (h) {
