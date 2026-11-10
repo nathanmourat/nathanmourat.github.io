@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Nathan Mourat — Portfolio</title>
-<meta name="description" content="Portfolio de Nathan Mourat, étudiant en Master 1 Énergie à l'Université de La Réunion. Photovoltaïque, réseaux DC, automatisme. Recherche de stage d'avril à mi-juin 2027.">
+<meta name="description" content="Portfolio de Nathan Mourat, étudiant en Master 1 Énergie à l'Université de La Réunion. Photovoltaïque, réseaux, automatisme. Recherche de stage du 1er avril au 31 juillet 2027, jusqu'à 18 semaines, dates flexibles.">
 <meta name="author" content="Nathan Mourat">
 <meta name="theme-color" content="#0a0f12">
 <link rel="canonical" href="https://nathanmourat.github.io/">
@@ -300,6 +300,15 @@ section[id]{scroll-margin-top:calc(var(--headh) - 1px)}
 .motion .rail-spark{display:block}
 .project{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(24px,5vw,64px);padding-block:clamp(40px,6vw,80px);border-top:1px solid var(--line)}
 .rail + .project{padding-top:8px;border-top:0}
+.p-group{display:flex;align-items:center;gap:14px;margin:0;padding-top:clamp(40px,6vw,80px);border-top:1px solid var(--line);font:500 .72rem/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.p-group::after{content:"";flex:1;height:1px;background:var(--line-2)}
+.rail + .p-group{padding-top:0;border-top:0}
+.p-group + .project{padding-top:clamp(24px,3vw,36px);border-top:0}
+.p-card{margin:0;border:1px solid var(--line);background:var(--surface)}
+.p-card div{display:grid;grid-template-columns:110px minmax(0,1fr);gap:12px;padding:12px 14px;border-bottom:1px dashed var(--line)}
+.p-card div:last-child{border-bottom:0}
+.p-card dt{padding-top:3px;font:500 .66rem/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.p-card dd{margin:0;font-size:.94rem;color:var(--ink-2)}
 .p-info{position:sticky;top:calc(var(--headh) + 32px);align-self:start}
 .p-node{position:absolute;left:-41px;top:14px;width:12px;height:12px;border:2px solid var(--line-2);border-radius:50%;background:var(--bg);transition:background-color .4s,border-color .4s,box-shadow .4s}
 .project.live .p-node{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft),0 0 18px var(--accent)}
@@ -364,7 +373,8 @@ section[id]{scroll-margin-top:calc(var(--headh) - 1px)}
 .channel{display:grid;grid-template-columns:110px minmax(0,1fr) auto;align-items:center;gap:6px 12px;padding:16px 0;border-bottom:1px solid var(--line)}
 .channel .label{font:500 .68rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
 .channel .val{font-weight:500;text-decoration:none;word-break:break-word}
-.channel a.val:hover{color:var(--accent)}
+.channel a.val:hover,.channel .val a:hover{color:var(--accent)}
+.channel .val a{text-decoration:none}
 .channel .note{grid-column:2/-1;font:.74rem var(--mono);color:var(--muted)}
 .copy{background:none;border:1px solid var(--line-2);color:var(--muted);font:500 .66rem var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:6px 10px;cursor:pointer;transition:border-color .2s,color .2s}
 .copy:hover,.copy.ok{border-color:var(--accent);color:var(--accent)}
@@ -514,10 +524,11 @@ textarea.input{min-height:150px;resize:vertical}
           schéma, câblage, automate, variateur, IHM. Je m'oriente aujourd'hui vers le solaire,
           les réseaux en courant continu et le stockage.
         </p>
-        <p class="status" data-intro><span class="pulse" aria-hidden="true"></span><span data-en="Looking for a photovoltaics internship — April to mid-June 2027">Recherche un stage en photovoltaïque — avril à mi-juin 2027</span></p>
+        <p class="status" data-intro><span class="pulse" aria-hidden="true"></span><span data-en="Looking for an energy internship — photovoltaics, grids, automation · 1 April to 31 July 2027">Recherche un stage en énergie — photovoltaïque, réseaux, automatisme · du 1er avril au 31 juillet 2027</span></p>
         <div class="cta" data-intro>
           <a class="btn btn-primary magnetic" href="#projets"><span data-en="See projects">Voir les projets</span><span class="arr down" aria-hidden="true">↓</span></a>
           <a class="btn magnetic" href="#contact"><span data-en="Get in touch">Me contacter</span><span class="arr" aria-hidden="true">→</span></a>
+          <a class="btn magnetic" href="CV_Nathan_Mourat_FR.pdf" data-en-href="CV_Nathan_Mourat_EN.pdf" download><span data-en="Download my CV">Télécharger mon CV</span><span class="arr down" aria-hidden="true">↓</span></a>
         </div>
       </div>
 
@@ -644,10 +655,10 @@ textarea.input{min-height:150px;resize:vertical}
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
     <div class="marquee-group">
-      <span data-en="Photovoltaics">Photovoltaïque</span><span data-en="DC networks">Réseaux DC</span><span data-en="Storage">Stockage</span><span>GRAFCET</span><span>Ladder · ST</span><span>Sysmac Studio</span><span>SEE Electrical</span><span>XRelais</span><span>Python</span><span data-en="Wiring diagrams">Schémas électriques</span><span data-en="Commissioning">Mise en service</span>
+      <span data-en="Photovoltaics">Photovoltaïque</span><span data-en="DC networks">Réseaux DC</span><span data-en="Storage">Stockage</span><span>GRAFCET</span><span>Ladder · ST</span><span>Sysmac Studio</span><span>SEE Electrical</span><span>XRelais</span><span>Python</span><span>OpenFOAM</span><span data-en="Wiring diagrams">Schémas électriques</span><span data-en="Commissioning">Mise en service</span>
     </div>
     <div class="marquee-group">
-      <span data-en="Photovoltaics">Photovoltaïque</span><span data-en="DC networks">Réseaux DC</span><span data-en="Storage">Stockage</span><span>GRAFCET</span><span>Ladder · ST</span><span>Sysmac Studio</span><span>SEE Electrical</span><span>XRelais</span><span>Python</span><span data-en="Wiring diagrams">Schémas électriques</span><span data-en="Commissioning">Mise en service</span>
+      <span data-en="Photovoltaics">Photovoltaïque</span><span data-en="DC networks">Réseaux DC</span><span data-en="Storage">Stockage</span><span>GRAFCET</span><span>Ladder · ST</span><span>Sysmac Studio</span><span>SEE Electrical</span><span>XRelais</span><span>Python</span><span>OpenFOAM</span><span data-en="Wiring diagrams">Schémas électriques</span><span data-en="Commissioning">Mise en service</span>
     </div>
   </div>
 </div>
@@ -661,17 +672,19 @@ textarea.input{min-height:150px;resize:vertical}
       <span class="sec-line" aria-hidden="true"></span>
     </div>
 
-    <p class="statement" data-en="A ten-week internship, from April to mid-June 2027, on a photovoltaic subject: sizing and simulation of installations, production monitoring and performance analysis, direct-current architectures, PV–storage coupling, or power quality and protection.">
-      Un stage d'environ dix semaines, d'avril à mi-juin 2027, sur un sujet photovoltaïque :
-      dimensionnement et simulation d'installations, suivi de production et analyse de performance,
-      architectures en courant continu, couplage PV–stockage, ou qualité et protection des réseaux.
+    <p class="statement" data-en="An internship of up to 18 weeks, from 1 April to 31 July 2027, with flexible dates. In photovoltaics: sizing and simulation of installations, production monitoring and performance analysis, direct-current architectures, PV–storage coupling, power quality and protection. I am also looking at automation and instrumentation applied to energy, consumption monitoring and IIoT, and grid operators.">
+      Un stage jusqu'à 18 semaines, du 1er avril au 31 juillet 2027, dates flexibles.
+      Côté photovoltaïque : dimensionnement et simulation d'installations, suivi de production et analyse
+      de performance, architectures en courant continu, couplage PV–stockage, qualité et protection des réseaux.
+      Je cherche aussi en automatisme et instrumentation appliqués à l'énergie, en suivi de consommation
+      et IIoT, et chez les gestionnaires de réseau.
     </p>
 
     <dl class="facts" data-reveal>
       <div class="fact"><dt data-en="In industry">En entreprise</dt><dd><span data-count="24">24</span><small data-en="weeks of internships">semaines de stage</small></dd></div>
-      <div class="fact"><dt data-en="Target internship">Stage visé</dt><dd><span data-count="10">10</span><small data-en="weeks">semaines</small></dd></div>
-      <div class="fact"><dt data-en="Period">Période</dt><dd><span>2027</span><small data-en="April → mid-June">avril → mi-juin</small></dd></div>
-      <div class="fact"><dt data-en="Mobility">Mobilité</dt><dd><span data-count="3">3</span><small data-en="Réunion · Europe · United Kingdom">Réunion · Europe · Royaume-Uni</small></dd></div>
+      <div class="fact"><dt data-en="Target internship">Stage visé</dt><dd><span data-count="18">18</span><small data-en="weeks at most">semaines au plus</small></dd></div>
+      <div class="fact"><dt data-en="Period">Période</dt><dd><span>2027</span><small data-en="1 April → 31 July">1er avril → 31 juillet</small></dd></div>
+      <div class="fact"><dt data-en="Mobility">Mobilité</dt><dd><span data-count="3">3</span><small data-en="Réunion · Europe · Switzerland">Réunion · Europe · Suisse</small></dd></div>
     </dl>
 
     <div class="split">
@@ -687,6 +700,8 @@ textarea.input{min-height:150px;resize:vertical}
           <li data-en="Solar asset producers and operators">Producteurs et exploitants d'actifs solaires</li>
           <li data-en="Energy research laboratories and centres">Laboratoires et centres de recherche énergie</li>
           <li data-en="Inverter and storage manufacturers">Fabricants d'onduleurs et de stockage</li>
+          <li data-en="Automation manufacturers and integrators">Fabricants d'automatismes et intégrateurs</li>
+          <li data-en="Grid operators">Gestionnaires de réseau</li>
         </ul>
       </div>
     </div>
@@ -722,19 +737,21 @@ textarea.input{min-height:150px;resize:vertical}
         </ul>
       </div>
       <div class="strip" data-reveal>
-        <div class="strip-head"><span class="strip-tag" aria-hidden="true">-X3</span><h3 data-en="Design and analysis">Conception et calcul</h3><span class="strip-n" aria-hidden="true">04</span></div>
+        <div class="strip-head"><span class="strip-tag" aria-hidden="true">-X3</span><h3 data-en="Design and analysis">Conception et calcul</h3><span class="strip-n" aria-hidden="true">06</span></div>
         <ul class="terms">
           <li><span class="screw" aria-hidden="true"></span><span class="tn" aria-hidden="true">01</span><span>SEE Electrical, XRelais</span></li>
-          <li><span class="screw" aria-hidden="true"></span><span class="tn" aria-hidden="true">02</span><span>Python</span></li>
-          <li><span class="screw" aria-hidden="true"></span><span class="tn" aria-hidden="true">03</span><span data-en="Test sheets and validation procedures">Fiches de tests et procédures de validation</span></li>
-          <li><span class="screw" aria-hidden="true"></span><span class="tn" aria-hidden="true">04</span><span data-en="Energy balances">Bilans énergétiques</span></li>
+          <li><span class="screw" aria-hidden="true"></span><span class="tn" aria-hidden="true">02</span><span data-en="Scientific Python: numerical methods, notebooks">Python scientifique : méthodes numériques, notebooks</span></li>
+          <li><span class="screw" aria-hidden="true"></span><span class="tn" aria-hidden="true">03</span><span data-en="OpenFOAM (CFD) — used on a project">OpenFOAM (CFD) — utilisé en projet</span></li>
+          <li><span class="screw" aria-hidden="true"></span><span class="tn" aria-hidden="true">04</span><span data-en="EnergyPlus (via Envelop / idfkit) — currently learning">EnergyPlus (via Envelop / idfkit) — en apprentissage</span></li>
+          <li><span class="screw" aria-hidden="true"></span><span class="tn" aria-hidden="true">05</span><span data-en="Test sheets and validation procedures">Fiches de tests et procédures de validation</span></li>
+          <li><span class="screw" aria-hidden="true"></span><span class="tn" aria-hidden="true">06</span><span data-en="Energy balances">Bilans énergétiques</span></li>
         </ul>
       </div>
       <div class="strip" data-reveal>
         <div class="strip-head"><span class="strip-tag" aria-hidden="true">-X4</span><h3 data-en="Languages">Langues</h3><span class="strip-n" aria-hidden="true">02</span></div>
         <ul class="terms">
           <li><span class="screw" aria-hidden="true"></span><span class="tn" aria-hidden="true">01</span><span data-en="French — native">Français — langue maternelle</span></li>
-          <li><span class="screw" aria-hidden="true"></span><span class="tn" aria-hidden="true">02</span><span data-en="Technical English — B1 level">Anglais technique — niveau B1</span></li>
+          <li><span class="screw" aria-hidden="true"></span><span class="tn" aria-hidden="true">02</span><span data-en="English — C1 (university assessment)">Anglais — C1 (évaluation universitaire)</span></li>
         </ul>
       </div>
     </div>
@@ -746,17 +763,98 @@ textarea.input{min-height:150px;resize:vertical}
     <div class="sec-head">
       <span class="sec-idx">03</span>
       <h2 class="sec-title" data-en="Projects">Projets</h2>
-      <span class="sec-ref">BUT GEII · 2022—2026</span>
+      <span class="sec-ref" data-en="Energy master's · BUT GEII">Master Énergie · BUT GEII</span>
       <span class="sec-line" aria-hidden="true"></span>
     </div>
 
     <div class="projects">
       <div class="rail" aria-hidden="true"><span class="rail-fill"></span><span class="rail-spark"></span></div>
 
+      <p class="p-group" data-en="Energy master's · 2026—2027">Master Énergie · 2026—2027</p>
+
       <article class="project">
         <div class="p-info">
           <span class="p-node" aria-hidden="true"></span>
-          <div class="p-meta"><span class="p-num" aria-hidden="true">P1</span><span class="tag" data-en="Design">Concevoir</span></div>
+          <div class="p-meta"><span class="p-num" aria-hidden="true">P1</span><span class="tag" data-en="Simulate">Simuler</span></div>
+          <h3 data-en="Modelling and optimisation of a bioreactor">Modélisation et optimisation d'un bioréacteur</h3>
+          <p data-en="Master 1 report submitted on 1 November 2026. When a stirred bioreactor is scaled up, mixing becomes less efficient and gradients of dissolved oxygen and temperature appear, which reduces productivity. The question: how does the change of scale alter the flow and the mass and heat transfers, from a 100 L pilot to a 10 m³ vessel? With no chemistry or biology background since secondary school, I treated the subject as a fluid mechanics and engineering problem: the biomass only comes in through the oxygen it consumes and the heat it releases.">
+            Rapport de Master 1 rendu le 1er novembre 2026. Quand on agrandit un bioréacteur agité, le mélange
+            devient moins efficace et des gradients d'oxygène dissous et de température apparaissent, ce qui
+            réduit la productivité. La question : comment le changement d'échelle modifie-t-il l'écoulement et
+            les transferts de matière et de chaleur, du pilote de 100 L à une cuve de 10 m³ ? Sans bagage en
+            chimie ni en biologie depuis le lycée, j'ai traité le sujet comme un problème de mécanique des
+            fluides et d'ingénierie : la biomasse n'y intervient que par l'oxygène qu'elle consomme et la
+            chaleur qu'elle dégage.
+          </p>
+          <ol class="steps">
+            <li><span class="step-n" aria-hidden="true">01</span><div><h4 data-en="Orders of magnitude">Ordres de grandeur</h4><p data-en="Dimensional analysis and literature correlations (Reynolds number, power number, power per unit volume, mixing time, kLa), then overall oxygen and heat balances at three geometrically similar scales: 1 L, 100 L and 10 m³.">Analyse dimensionnelle et corrélations de la littérature (nombre de Reynolds, nombre de puissance, puissance volumique, temps de mélange, kLa), puis bilans globaux d'oxygène et de chaleur à trois échelles géométriquement semblables : 1 L, 100 L et 10 m³.</p></div></li>
+            <li><span class="step-n" aria-hidden="true">02</span><div><h4 data-en="CFD simulation">Simulation CFD</h4><p data-en="Open-source workflow, OpenFOAM v2506 driven by Python scripts: 316,797-cell mesh (blockMesh, snappyHexMesh), mean turbulent flow with RANS k-ε and a multiple reference frame (MRF), then transport of a tracer and of heat.">Chaîne de calcul libre, OpenFOAM v2506 piloté par des scripts Python : maillage de 316 797 mailles (blockMesh, snappyHexMesh), écoulement turbulent moyen en RANS k-ε avec référentiel tournant multiple (MRF), puis transport d'un traceur et de la chaleur.</p></div></li>
+            <li><span class="step-n" aria-hidden="true">03</span><div><h4 data-en="Validation and limits">Validation et limites</h4><p data-en="On a standard tank with a single Rushton turbine, three meshes: power number of 5.60 against 5.5 in the literature. The simulated mixing time there is 1.66 times longer than the reference correlation: this bias is measured, then corrected. The steady-state calculation allows two flow regimes for the pilot, 21% apart in power, and the gas phase is not simulated.">Sur une cuve standard à une turbine de Rushton, trois maillages : nombre de puissance de 5,60 pour 5,5 dans la littérature. Le temps de mélange simulé y est 1,66 fois plus long que la corrélation de référence : ce biais est mesuré, puis corrigé. Le calcul stationnaire admet deux régimes d'écoulement pour le pilote, avec 21 % d'écart sur la puissance, et la phase gazeuse n'est pas simulée.</p></div></li>
+            <li><span class="step-n" aria-hidden="true">04</span><div><h4 data-en="Results">Résultats</h4><p data-en="Scale-up under two criteria, constant power per unit volume and constant tip speed. The power number (≈ 11.7 for three turbines) and the number of revolutions needed for mixing (≈ 33) do not depend on scale. Once corrected for the bias, the mixing time rises from 2.4 s for the pilot to 6.5 s at 10 m³ at constant power per unit volume, the same order as the dissolved-oxygen consumption time (7.6 s): oxygen gradients are expected. The heat flux to be removed through the jacket is multiplied by 4.6, while the temperature stays uniform in the vessel.">Extrapolation selon deux critères, puissance volumique constante et vitesse en bout de pale constante. Le nombre de puissance (≈ 11,7 pour trois turbines) et le nombre de tours nécessaire au mélange (≈ 33) ne dépendent pas de l'échelle. Corrigé du biais, le temps de mélange passe de 2,4 s pour le pilote à 6,5 s à 10 m³ à puissance volumique constante, du même ordre que le temps de consommation de l'oxygène dissous (7,6 s) : des gradients d'oxygène sont attendus. Le flux de chaleur à évacuer par la double enveloppe est multiplié par 4,6, alors que la température reste homogène dans la cuve.</p></div></li>
+            <li><span class="step-n" aria-hidden="true">05</span><div><h4 data-en="Link with energy">Lien avec l'énergie</h4><p data-en="Stirring power is both the scale-up criterion and an item of consumption: 702 W for the pilot, 70 kW at 10 m³ at constant power per unit volume. It is entirely dissipated as heat, to be removed on top of the heat released by the culture.">La puissance d'agitation est à la fois le critère d'extrapolation et un poste de consommation : 702 W pour le pilote, 70 kW à 10 m³ à puissance volumique constante. Elle est entièrement dissipée en chaleur, à évacuer en plus de la chaleur dégagée par la culture.</p></div></li>
+          </ol>
+        </div>
+        <div class="p-media">
+          <div class="row">
+            <figure class="shot" style="--r:2.292"><button type="button" class="zoom"><img src="bioreacteur_champs.jpg" alt="Trois cartes de simulation du pilote de 100 L dans un plan vertical : vitesse moyenne rapportée à la vitesse en bout de pale avec vecteurs, dissipation turbulente en échelle logarithmique, zones lentes en rouge et orange autour des trois turbines" data-en-alt="Three simulation maps of the 100 L pilot in a vertical plane: mean velocity relative to tip speed with vectors, turbulent dissipation on a logarithmic scale, slow zones in red and orange around the three turbines" loading="lazy" decoding="async" width="1600" height="698"></button><figcaption data-en="100 L pilot at 500 rpm, vertical plane between two baffles — mean velocity, turbulent dissipation and slow zones">Pilote de 100 L à 500 tr/min, plan vertical entre deux chicanes — vitesse moyenne, dissipation turbulente et zones lentes</figcaption></figure>
+          </div>
+          <div class="row">
+            <figure class="shot" style="--r:1.364"><button type="button" class="zoom"><img src="bioreacteur_maillage.jpg" alt="Maillage hexaédrique du pilote : coupe verticale montrant le raffinement autour des trois turbines, et coupe horizontale avec les six pales, l'arbre et les quatre chicanes en rouge" data-en-alt="Hexahedral mesh of the pilot: vertical section showing the refinement around the three turbines, and horizontal section with the six blades, the shaft and the four baffles in red" loading="lazy" decoding="async" width="1500" height="1100"></button><figcaption data-en="Pilot mesh, 316,797 cells — vertical section through the blades and horizontal section at the middle turbine">Maillage du pilote, 316 797 mailles — coupe verticale par les pales et coupe horizontale au niveau de la turbine médiane</figcaption></figure>
+          </div>
+          <div class="row">
+            <figure class="shot" style="--r:3.053"><button type="button" class="zoom"><img src="bioreacteur_echelles.jpg" alt="Trois diagrammes en barres comparant le laboratoire 1 L, le pilote 100 L et la cuve de 10 m³ selon les deux critères : vitesse de rotation de 1 391 à 108 tr/min et puissance volumique, temps de mélange corrigé de 0,9 à 11,2 s face au temps de consommation de l'oxygène de 7,6 s, flux thermique de 0,4 à 8,9 kW/m²" data-en-alt="Three bar charts comparing the 1 L laboratory vessel, the 100 L pilot and the 10 m³ vessel under both criteria: rotation speed from 1,391 to 108 rpm and power per unit volume, corrected mixing time from 0.9 to 11.2 s against the 7.6 s oxygen consumption time, heat flux from 0.4 to 8.9 kW/m²" loading="lazy" decoding="async" width="1600" height="524"></button><figcaption data-en="Effect of scale and of the scale-up criterion — speed and power per unit volume, mixing time, heat flux to be removed">Effet de l'échelle et du critère d'extrapolation — vitesse et puissance volumique, temps de mélange, flux thermique à évacuer</figcaption></figure>
+          </div>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="p-info">
+          <span class="p-node" aria-hidden="true"></span>
+          <div class="p-meta"><span class="p-num" aria-hidden="true">P2</span><span class="tag" data-en="In progress">En cours</span></div>
+          <h3 data-en="DC versus AC air conditioning: an energy balance">Climatisation en courant continu ou alternatif : bilan énergétique</h3>
+          <p data-en="Master 1 supervised project, carried out as a group over one semester and still in progress. The question studied: does the photovoltaic surplus available as direct current, used to pre-cool the building during sunny hours thanks to its thermal inertia, bring a gain greater than the electrical gain from removing the conversions alone?">
+            Projet tutoré de Master 1, mené en groupe sur un semestre et encore en cours. La question étudiée :
+            l'excédent photovoltaïque disponible en courant continu, utilisé pour pré-refroidir le bâtiment
+            pendant les heures ensoleillées grâce à son inertie thermique, apporte-t-il un gain supérieur au
+            seul gain électrique de la suppression des conversions ?
+          </p>
+        </div>
+        <div class="p-media">
+          <dl class="p-card" data-reveal>
+            <div><dt data-en="Setting">Cadre</dt><dd data-en="Supervised project, as a group">Projet tutoré, en groupe</dd></div>
+            <div><dt data-en="Duration">Durée</dt><dd data-en="One semester">Un semestre</dd></div>
+            <div><dt data-en="Tool">Outil</dt><dd data-en="EnergyPlus, through the Envelop / idfkit web editor">EnergyPlus, via l'éditeur web Envelop / idfkit</dd></div>
+            <div><dt data-en="Status">État</dt><dd data-en="In progress — no results yet">En cours — pas encore de résultat</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="p-info">
+          <span class="p-node" aria-hidden="true"></span>
+          <div class="p-meta"><span class="p-num" aria-hidden="true">P3</span><span class="tag" data-en="Analyse">Analyser</span></div>
+          <h3 data-en="Load curve of a swimming pool">Courbe de charge d'une piscine</h3>
+          <p data-en="Master 1 group project on the load curve of a swimming pool. My share of the work: analysing the load curve and the oral presentation.">
+            Projet de groupe de Master 1 sur la courbe de charge d'une piscine. Ma part du travail :
+            l'analyse de la courbe de charge et la soutenance orale.
+          </p>
+        </div>
+        <div class="p-media">
+          <dl class="p-card" data-reveal>
+            <div><dt data-en="Setting">Cadre</dt><dd data-en="Group project">Projet de groupe</dd></div>
+            <div><dt data-en="Subject">Objet</dt><dd data-en="Load curve of a swimming pool">Courbe de charge d'une piscine</dd></div>
+            <div><dt data-en="Deliverables">Livrables</dt><dd data-en="Written report and 10-minute oral presentation — November 2026">Rapport écrit et soutenance orale de 10 minutes — novembre 2026</dd></div>
+            <div><dt data-en="My role">Mon rôle</dt><dd data-en="Load curve analysis, oral presentation">Analyse de la courbe de charge, soutenance orale</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <p class="p-group">BUT GEII · 2022—2026</p>
+
+      <article class="project">
+        <div class="p-info">
+          <span class="p-node" aria-hidden="true"></span>
+          <div class="p-meta"><span class="p-num" aria-hidden="true">P4</span><span class="tag" data-en="Design">Concevoir</span></div>
           <h3 data-en="Electrical wiring">Câblages électriques</h3>
           <p data-en="On every project, at school as in industry, everything starts with the diagram. It is the basis of the work and what makes the wiring fast and verifiable afterwards.">
             Sur chaque projet, en cours comme en entreprise, tout part du schéma. C'est la base du travail
@@ -781,7 +879,7 @@ textarea.input{min-height:150px;resize:vertical}
       <article class="project">
         <div class="p-info">
           <span class="p-node" aria-hidden="true"></span>
-          <div class="p-meta"><span class="p-num" aria-hidden="true">P2</span><span class="tag" data-en="Verify">Vérifier</span></div>
+          <div class="p-meta"><span class="p-num" aria-hidden="true">P5</span><span class="tag" data-en="Verify">Vérifier</span></div>
           <h3 data-en="Test sheets and continuity testing">Fiche de tests et tests de continuité</h3>
           <p data-en="The test sheet confronts the program with every situation planned for: inputs triggered, expected result, observed result, conclusion. Continuity testing, in turn, uncovered physical faults that the program alone could not reveal on the SAE4 and SAE5 projects.">
             La fiche de tests sert à confronter le programme à toutes les situations prévues : entrées sollicitées,
@@ -803,7 +901,7 @@ textarea.input{min-height:150px;resize:vertical}
       <article class="project">
         <div class="p-info">
           <span class="p-node" aria-hidden="true"></span>
-          <div class="p-meta"><span class="p-num" aria-hidden="true">P3</span><span class="tag" data-en="Maintain and integrate">Maintenir et intégrer</span></div>
+          <div class="p-meta"><span class="p-num" aria-hidden="true">P6</span><span class="tag" data-en="Maintain and integrate">Maintenir et intégrer</span></div>
           <h3 data-en="Internship at Agis">Stage chez Agis</h3>
           <p data-en="Twenty-four weeks in industry over the last two years of the degree, in food processing. Industrial computing maintenance in the second year, then full integration of a machine in the third.">
             Vingt-quatre semaines en entreprise sur les deux dernières années du BUT, en agroalimentaire.
@@ -829,7 +927,7 @@ textarea.input{min-height:150px;resize:vertical}
       <article class="project">
         <div class="p-info">
           <span class="p-node" aria-hidden="true"></span>
-          <div class="p-meta"><span class="p-num" aria-hidden="true">P4</span><span class="tag" data-en="Build">Réaliser</span></div>
+          <div class="p-meta"><span class="p-num" aria-hidden="true">P7</span><span class="tag" data-en="Build">Réaliser</span></div>
           <h3 data-en="Lab work and prototypes">Travaux pratiques et prototypes</h3>
           <p data-en="Coursework projects: an instrumented mobile robot, automation benches with position sensors, control pendants and cabinets assembled then commissioned.">
             Projets de formation : robot mobile instrumenté, bancs d'automatisme avec capteurs de position,
@@ -881,8 +979,8 @@ textarea.input{min-height:150px;resize:vertical}
       <div class="entry" data-reveal>
         <div class="when">2022</div>
         <div>
-          <h3 data-en="French Baccalaureate">Baccalauréat</h3>
-          <p data-en="Entered the BUT GEII programme after the baccalaureate.">Entrée en BUT GEII à la suite du baccalauréat.</p>
+          <h3 data-en="French Baccalaureate — STI2D">Baccalauréat STI2D</h3>
+          <p data-en="SIN specialisation, awarded with honours (mention assez bien) — Lycée Jean Perrin, Rezé.">Spécialité SIN, mention assez bien — lycée Jean Perrin, Rezé.</p>
         </div>
       </div>
     </div>
@@ -912,9 +1010,14 @@ textarea.input{min-height:150px;resize:vertical}
             <a class="val" href="https://www.linkedin.com/in/nathan-mourat-ba54a3183" target="_blank" rel="noopener">nathan-mourat ↗</a>
           </li>
           <li class="channel">
+            <span class="label">CV</span>
+            <span class="val"><a href="CV_Nathan_Mourat_FR.pdf" download lang="fr">Français ↓</a> · <a href="CV_Nathan_Mourat_EN.pdf" download lang="en">English ↓</a></span>
+            <span class="note" data-en="PDF, one page">PDF, une page</span>
+          </li>
+          <li class="channel">
             <span class="label" data-en="Location">Localisation</span>
             <span class="val">Saint-Denis, La Réunion</span>
-            <span class="note" data-en="Mobile across Europe and the United Kingdom">Mobile en Europe et au Royaume-Uni</span>
+            <span class="note" data-en="Mobile across Europe and Switzerland">Mobile en Europe et en Suisse</span>
           </li>
         </ul>
       </div>
@@ -978,7 +1081,7 @@ textarea.input{min-height:150px;resize:vertical}
   <div class="wrap">
     <p class="wordmark" aria-hidden="true"><span>Nathan Mourat</span></p>
     <div class="foot-row">
-      <p data-en="Nathan Mourat — Master 1 Energy, University of La Réunion. Portfolio updated October 2026.">Nathan Mourat — Master 1 Énergie, Université de La Réunion. Portfolio mis à jour en octobre 2026.</p>
+      <p data-en="Nathan Mourat — Master 1 Energy, University of La Réunion. Portfolio updated November 2026.">Nathan Mourat — Master 1 Énergie, Université de La Réunion. Portfolio mis à jour en novembre 2026.</p>
       <a href="#profil" data-en="Back to top ↑">Haut de page ↑</a>
     </div>
   </div>
@@ -1055,11 +1158,17 @@ textarea.input{min-height:150px;resize:vertical}
   tNodes.forEach(function (el) { el.setAttribute('data-fr', el.textContent.trim().replace(/\s+/g, ' ')); });
   var aNodes = $$('[data-en-label]');
   aNodes.forEach(function (el) { el.setAttribute('data-fr-label', el.getAttribute('aria-label') || ''); });
+  var altNodes = $$('[data-en-alt]');
+  altNodes.forEach(function (el) { el.setAttribute('data-fr-alt', el.getAttribute('alt') || ''); });
+  var hrefNodes = $$('[data-en-href]');
+  hrefNodes.forEach(function (el) { el.setAttribute('data-fr-href', el.getAttribute('href')); });
   var langBtn = $('#langBtn');
   function applyLang(l) {
     lang = l;
     tNodes.forEach(function (el) { var v = el.getAttribute('data-' + l); if (v !== null) el.textContent = v; });
     aNodes.forEach(function (el) { el.setAttribute('aria-label', el.getAttribute('data-' + l + '-label')); });
+    altNodes.forEach(function (el) { el.setAttribute('alt', el.getAttribute('data-' + l + '-alt')); });
+    hrefNodes.forEach(function (el) { el.setAttribute('href', el.getAttribute('data-' + l + '-href')); });
     root.lang = l;
     langBtn.setAttribute('data-lang', l);
     langBtn.setAttribute('aria-label', t('langBtn'));
